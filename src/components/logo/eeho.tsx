@@ -5,7 +5,7 @@ interface Props {
     color: color;
     style?: React.CSSProperties;
 }
-const GreenEeho = ({ width, height, color, style }: Props) => {
+const Eeho = ({ width, height, color, style }: Props) => {
     const TextColor = color == "green" ? "#5E7154" : "#FDE8D5";
     return (
         <svg
@@ -51,4 +51,4 @@ const GreenEeho = ({ width, height, color, style }: Props) => {
     );
 };
 
-export default GreenEeho;
+export default Eeho;
