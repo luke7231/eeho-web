@@ -1,5 +1,6 @@
 import React from "react";
 import GlobalStyle from "./global-style";
+import Router from "./router";
 
 function App() {
     // function postMessage() {
@@ -9,7 +10,7 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            <div>HOME</div>
+            <Router />
         </>
     );
 }
