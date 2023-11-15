@@ -3,6 +3,9 @@ import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
+    :root {
+        height: 100%;
+    }
     a{
         text-decoration: none;
         color: inherit;
@@ -15,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: 0;
-        font-size: 10px;
+        font-size: 14px;
         vertical-align: baseline;
     }
     body{
