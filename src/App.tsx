@@ -3,6 +3,7 @@ import GlobalStyle from "./global-style";
 import Router from "./router";
 import styled from "styled-components";
 import { getResponsiveMaxWidth } from "./utils/layout-util";
+import { AuthProvider } from "./contexts/auth-provider";
 
 const Wrapper = styled.section`
     height: 100%;
@@ -18,10 +19,12 @@ function App() {
 
     return (
         <>
-            <GlobalStyle />
-            <Wrapper>
-                <Router />
-            </Wrapper>
+            <AuthProvider>
+                <GlobalStyle />
+                <Wrapper>
+                    <Router />
+                </Wrapper>
+            </AuthProvider>
         </>
     );
 }
