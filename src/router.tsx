@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./home";
-import Onboarding from "./onboarding";
+import Home from "./Routes/home";
+import Onboarding from "./Routes/onboarding";
 
 const Router = () => {
     return (
