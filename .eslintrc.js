@@ -5,7 +5,6 @@ module.exports = {
         es6: true,
     },
     extends: [
-        "plugin:@typescript-eslint/recommended",
         // typescript 표준 규칙 모음
         "plugin:import/errors",
         "plugin:import/warnings",
@@ -13,7 +12,7 @@ module.exports = {
         // import 관련 규칙 모음
 
         "plugin:prettier/recommended",
-        "plugin:prettier",
+        "prettier",
         // prettier 관련 규칙 모음
     ],
     parserOptions: {
