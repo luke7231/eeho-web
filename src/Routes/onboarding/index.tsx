@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/auth-provider";
 import styled from "styled-components";
 import Eeho from "../../components/logo/eeho";
 import { useNavigate } from "react-router-dom";
+// import KakaoLoginButton from "../../components/onboarding/kakao-login";
 const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -33,15 +34,25 @@ const KakaoLoginButton = styled.div`
 const Onboarding = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
-    const onClick = () => {
+    // const onClick = () => {
+    //     // login();
+    //     // navigate("/");
+    // };
+    const Rest_api_key = "5866f3376626d1cdcd6e97883951e58f"; //REST API KEY
+    const redirect_uri = "http://localhost:3000/auth"; //Redirect URI
+    // oauth 요청 URL
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
+    const handleLogin = () => {
         login();
-        navigate("agree");
+        navigate("/");
+        // window.location.href = kakaoURL;
     };
     return (
         <Container>
             <Eeho color="green" width={129} height={83} style={{ marginBottom: 49 }} />
             <Text>간편하게 로그인하고 에호해보세요.</Text>
-            <KakaoLoginButton onClick={onClick}>KAKAO LOGIN</KakaoLoginButton>
+            <KakaoLoginButton onClick={handleLogin}>KAKAO LOGIN</KakaoLoginButton>
+            {/* <KakaoLoginButton /> */}
         </Container>
     );
 };
