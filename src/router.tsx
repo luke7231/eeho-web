@@ -4,6 +4,8 @@ import Onboarding from "./Routes/onboarding";
 import { useAuth } from "./contexts/auth-provider";
 import Agree from "./Routes/onboarding/agree";
 import KakaoRedirection from "./Routes/onboarding/kakao-redirection";
+import Notification from "./Routes/notification";
+import Settings from "./Routes/settings";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -15,6 +17,8 @@ const Router = () => {
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/auth" element={<KakaoRedirection />} />
                 <Route path="/onboarding/agree" element={<Agree />} />
+                <Route path="/notification" element={<Notification />} />
+                <Route path="/settings" element={<Settings />} />
             </Routes>
         </BrowserRouter>
     );
