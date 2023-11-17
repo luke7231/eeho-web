@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         line-height: 1;
         font-family: 'Noto Sans KR', sans-serif;
-        background-color: #FDE8D5;
+        background-color: #FAFFF1;
         
         margin-bottom: 100px;
     }
