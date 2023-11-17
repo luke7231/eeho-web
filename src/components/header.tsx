@@ -5,6 +5,7 @@ import Menu from "../images/icons/burger.png";
 import { useNavigate } from "react-router-dom";
 const Container = styled.div`
     position: absolute;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
