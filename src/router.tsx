@@ -12,6 +12,11 @@ import Intro3 from "./Routes/onboarding/introduction/intro-3";
 import Intro4 from "./Routes/onboarding/introduction/intro-4";
 import Intro5 from "./Routes/onboarding/introduction/intro-5";
 import SignUp from "./Routes/onboarding/sign-up";
+import CreateFamily from "./Routes/onboarding/sign-up/create-family/create-family";
+import SetProfile from "./Routes/onboarding/set-profile";
+import CreationResult from "./Routes/onboarding/sign-up/create-family/creation-result";
+import ParticipateFamily from "./Routes/onboarding/sign-up/participate-family/participate-family";
+import ParticipationResult from "./Routes/onboarding/sign-up/participate-family/participation-result";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -27,6 +32,13 @@ const Router = () => {
                 <Route path="/onboarding5" element={<Intro5 />} />
 
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-up/create" element={<CreateFamily />} />
+                <Route path="/sign-up/set-profile" element={<SetProfile />} />
+                <Route path="/sign-up/creation-result" element={<CreationResult />} />
+
+                <Route path="/sign-up/participate" element={<ParticipateFamily />} />
+                <Route path="/sign-up/set-profile" element={<SetProfile />} />
+                <Route path="/sign-up/participation-result" element={<ParticipationResult />} />
 
                 <Route path="/auth" element={<KakaoRedirection />} />
                 <Route path="/onboarding/agree" element={<Agree />} />
