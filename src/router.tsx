@@ -11,6 +11,7 @@ import Intro2 from "./Routes/onboarding/introduction/intro-2";
 import Intro3 from "./Routes/onboarding/introduction/intro-3";
 import Intro4 from "./Routes/onboarding/introduction/intro-4";
 import Intro5 from "./Routes/onboarding/introduction/intro-5";
+import SignUp from "./Routes/onboarding/sign-up";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -24,6 +25,9 @@ const Router = () => {
                 <Route path="/onboarding3" element={<Intro3 />} />
                 <Route path="/onboarding4" element={<Intro4 />} />
                 <Route path="/onboarding5" element={<Intro5 />} />
+
+                <Route path="/sign-up" element={<SignUp />} />
+
                 <Route path="/auth" element={<KakaoRedirection />} />
                 <Route path="/onboarding/agree" element={<Agree />} />
                 <Route path="/notification" element={<Notification />} />
