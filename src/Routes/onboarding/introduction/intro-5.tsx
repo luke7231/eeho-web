@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Intro3Img from "../../../images/icons/onboarding4-img.png";
 import Title, { GreenText } from "../../../components/onboarding/title";
 import Text from "../../../components/onboarding/text";
 import Button from "../../../components/onboarding/button";
 import { useNavigate } from "react-router-dom";
+import { FadeInWrapper } from "../../../components/onboarding/fade-in-wrapper";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -24,7 +25,9 @@ const Intro3 = () => {
     };
     return (
         <Contanier>
-            <Image src={Intro3Img} />
+            <FadeInWrapper>
+                <Image src={Intro3Img} />
+            </FadeInWrapper>
             <Title style={{ marginTop: 16 }}>
                 <GreenText>사진 </GreenText>
                 찍기

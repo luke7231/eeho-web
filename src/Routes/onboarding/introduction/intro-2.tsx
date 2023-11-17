@@ -4,6 +4,7 @@ import Title, { GreenText } from "../../../components/onboarding/title";
 import Text from "../../../components/onboarding/text";
 import Button from "../../../components/onboarding/button";
 import { useNavigate } from "react-router-dom";
+import { FadeInWrapper } from "../../../components/onboarding/fade-in-wrapper";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -24,7 +25,9 @@ const Intro2 = () => {
     };
     return (
         <Contanier>
-            <Image src={Intro2Img} />
+            <FadeInWrapper>
+                <Image src={Intro2Img} />
+            </FadeInWrapper>
             <Title style={{ marginTop: 70 }}>
                 가족에게 보내는
                 <br /> 시그널,
