@@ -13,6 +13,11 @@ interface AuthProviderProps {
     children: ReactNode;
 }
 
+// const processIsLoggedIn = () => {
+//     const token = localStorage.getItem("jwt");
+//     return Boolean(token);
+// };
+
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
