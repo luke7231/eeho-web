@@ -39,8 +39,11 @@ const Button = styled.div`
 const SignUp = () => {
     const navigate = useNavigate();
 
-    const onClickButton = () => {
-        navigate("/sign-up");
+    const onClickCreateButton = () => {
+        navigate("/sign-up/create");
+    };
+    const onClickParticiButton = () => {
+        navigate("/sign-up/participate");
     };
     return (
         <Contanier>
@@ -56,8 +59,8 @@ const SignUp = () => {
                 이미 만들어진 가족 그룹이 있다면 참가해 보세요.
             </Text>
             <ButtonContainer>
-                <Button>생성</Button>
-                <Button>참여</Button>
+                <Button onClick={onClickCreateButton}>생성</Button>
+                <Button onClick={onClickParticiButton}>참여</Button>
             </ButtonContainer>
         </Contanier>
     );
