@@ -13,6 +13,16 @@ const Wrapper = styled.section`
 `;
 
 function App() {
+    // window.addEventListener("message", (event: any) => {
+    //     console.log(event);
+    //     // console.log(data);
+    // });
+    // document.addEventListener("message", (event: any) => {
+    //     console.log(event);
+    // });
+    // window.addEventListener("message", (event) => {
+    //     console.log(event, " hi");
+    // });
     // function postMessage() {
     //     window.ReactNativeWebView.postMessage("안녕하세요");
     // }
