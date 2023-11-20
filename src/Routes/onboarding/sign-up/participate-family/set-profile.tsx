@@ -1,37 +1,67 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../../../components/onboarding/button";
-
+import styled from "styled-components";
+import BasicProfile from "../../../../images/icons/basic-profile-img.png";
+import PlusImg from "../../../../images/icons/plus-button.png";
+const Contanier = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 48px;
+`;
+const Profile = styled.div`
+    position: relative;
+`;
+const ProfileImage = styled.img`
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    border: 9px solid #95b485;
+`;
+const PlusButton = styled.img`
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+`;
 const SetProfile = () => {
     const navigate = useNavigate();
     const {
         state: { familyCode },
     } = useLocation();
+    // const familyCode = "84675f1c";
+    // const familyCode = "81436bdb";
     const [nickName, setNickName] = useState("");
     const [role, setRole] = useState("아빠");
     const onClickButton = async () => {
-        // navigate("/sign-up/participate/result");
-        console.log(familyCode + "\n" + nickName + "\n" + role);
         const data = {
             code: familyCode,
             userName: nickName,
             familyRole: role,
+            // token 추가해줘야함.
+            pushToken: localStorage.getItem("expo_push_token") || "",
         };
-        fetch("http://172.16.230.168:8080/family/participate", {
+        fetch(process.env.REACT_APP_SERVER_URI + "/family/participate", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
-                // 다른 필요한 헤더가 있다면 추가해주세요
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(data), // 데이터를 JSON 문자열로 변환하여 body에 넣기
+            body: JSON.stringify(data),
         })
-            .then((response) => response.json()) // 응답을 JSON으로 파싱
+            .then((response) => response.json())
             .then((data) => {
-                console.log("성공적으로 데이터를 받아왔습니다:", data); // familyname, token, 알림메시지
+                // familyname, token, 알림메시지
                 if (data.ok) {
                     navigate("/sign-up/participate/result", {
                         state: {
                             familyName: data.familyName,
+                            token: data.token,
                         },
                     });
                 }
@@ -42,8 +72,11 @@ const SetProfile = () => {
     };
 
     return (
-        <div>
-            <div></div>
+        <Contanier>
+            <Profile>
+                <ProfileImage src={BasicProfile} />
+                <PlusButton src={PlusImg} />
+            </Profile>
             <input value={nickName} onChange={(v) => setNickName(v.target.value)} />
             <select name="languages" id="lang" onChange={(v) => setRole(v.target.value)}>
                 <option value="아빠">아빠</option>
@@ -54,7 +87,7 @@ const SetProfile = () => {
                 <option value="둘째 딸">둘째 딸</option>
             </select>
             <Button text="다 음" onClick={onClickButton} />
-        </div>
+        </Contanier>
     );
 };
 
