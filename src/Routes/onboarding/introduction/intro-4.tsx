@@ -5,6 +5,7 @@ import Text from "../../../components/onboarding/text";
 import Button from "../../../components/onboarding/button";
 import { useNavigate } from "react-router-dom";
 import { FadeInWrapper } from "../../../components/onboarding/fade-in-wrapper";
+import BackButton from "../../../components/onboarding/back-button";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -24,6 +25,7 @@ const Intro3 = () => {
     };
     return (
         <Contanier>
+            <BackButton />
             <FadeInWrapper>
                 <Image src={Intro3Img} />
             </FadeInWrapper>
