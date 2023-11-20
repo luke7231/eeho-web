@@ -14,16 +14,16 @@ const SetProfile = () => {
             familyName,
             userName: nickName,
             familyRole: role,
+            pushToken: localStorage.getItem("expo_push_token") || "",
         };
-        fetch("http://172.16.230.168:8080/family/create", {
+        fetch(process.env.REACT_APP_SERVER_URI + "/family/create", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
-                // 다른 필요한 헤더가 있다면 추가해주세요
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(data), // 데이터를 JSON 문자열로 변환하여 body에 넣기
+            body: JSON.stringify(data),
         })
-            .then((response) => response.json()) // 응답을 JSON으로 파싱
+            .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
                     navigate("/sign-up/create/result", {
