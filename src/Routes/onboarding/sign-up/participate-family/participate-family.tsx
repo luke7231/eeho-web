@@ -18,20 +18,25 @@ const Logo = styled.img`
     margin-bottom: 24px;
 `;
 const Title = styled.div`
+    height: 70px;
+    display: flex;
+    align-items: center;
     font-size: 24px;
     font-weight: 800;
     line-height: 29px;
     letter-spacing: 0em;
     text-align: center;
-    margin-bottom: 24px;
 `;
 const Text = styled.div`
+    height: 75px;
+    display: flex;
+    align-items: center;
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0em;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 42px;
 `;
 const CodeInput = styled.input`
     background-color: #bcd6ab;
@@ -41,6 +46,7 @@ const CodeInput = styled.input`
     text-align: center;
     font-size: 24px;
     margin-bottom: 48px;
+    border-radius: 10px;
 `;
 const CheckButton = styled.button`
     width: 95px;
@@ -51,6 +57,7 @@ const CheckButton = styled.button`
     align-items: center;
     color: #fff;
     font-size: 20px;
+    border-radius: 10px;
 `;
 const ParticipateFamily = () => {
     const navigate = useNavigate();
