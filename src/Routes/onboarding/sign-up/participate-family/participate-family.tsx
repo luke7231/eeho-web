@@ -1,7 +1,57 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/onboarding/button";
-
+import styled from "styled-components";
+import EehoLogo from "../../../../images/icons/EEHO.png";
+const Contanier = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 48px;
+`;
+const Logo = styled.img`
+    width: 95px;
+    height: 61px;
+    margin-bottom: 24px;
+`;
+const Title = styled.div`
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 24px;
+`;
+const Text = styled.div`
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 24px;
+`;
+const CodeInput = styled.input`
+    background-color: #bcd6ab;
+    height: 57px;
+    border: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 48px;
+`;
+const CheckButton = styled.button`
+    width: 95px;
+    height: 44px;
+    background-color: #627d50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+`;
 const ParticipateFamily = () => {
     const navigate = useNavigate();
     const [familyCode, setFamilyCode] = useState("");
@@ -14,37 +64,35 @@ const ParticipateFamily = () => {
         });
     };
     const onClickCheck = () => {
+        alert(familyCode);
         const data = {
             code: familyCode,
         };
-        fetch("http://172.16.230.168:8080/family/code/isExisted", {
+        fetch(process.env.REACT_APP_SERVER_URI + "/family/code/isExisted", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
-                // 다른 필요한 헤더가 있다면 추가해주세요
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(data), // 데이터를 JSON 문자열로 변환하여 body에 넣기
+            body: JSON.stringify(data),
         })
-            .then((response) => response.json()) // 응답을 JSON으로 파싱
+            .then((response) => response.json())
             .then((data) => {
-                console.log("성공적으로 데이터를 받아왔습니다:", data);
                 if (data.ok) {
                     setCanGoNext(true);
                 }
             })
-            .catch((error) => {
-                console.error("데이터를 받아오는 중 오류가 발생했습니다:", error);
-            });
+            .catch((e) => alert(e));
     };
+
     return (
-        <div>
-            <div>공유받은 가족 코드를 입력해주세요~</div>
-            <input value={familyCode} onChange={(v) => setFamilyCode(v.target.value)} />
-            <button onClick={onClickCheck} style={{ backgroundColor: "gray" }}>
-                확인
-            </button>
+        <Contanier>
+            <Logo src={EehoLogo} />
+            <Title>가족 초대 코드 입력</Title>
+            <Text>공유받은 가족 코드를 입력해주세요~</Text>
+            <CodeInput value={familyCode} onChange={(v) => setFamilyCode(v.target.value)} />
+            <CheckButton onClick={onClickCheck}>확인</CheckButton>
             {canGoNext ? <Button text="다 음" onClick={onClickButton} /> : <Button text="코드를 먼저 입력해주세요!" />}
-        </div>
+        </Contanier>
     );
 };
 

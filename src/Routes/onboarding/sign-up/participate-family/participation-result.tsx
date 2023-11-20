@@ -6,12 +6,12 @@ const ParticipationResult = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const {
-        state: { familyName },
+        state: { familyName, token },
     } = useLocation();
     console.log(familyName);
 
     const onClickButton = () => {
-        // localStorage.setItem("jwt", token);
+        localStorage.setItem("jwt", token);
         login();
         navigate("/");
     };
