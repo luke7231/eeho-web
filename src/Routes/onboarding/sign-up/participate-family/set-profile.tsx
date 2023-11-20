@@ -86,7 +86,6 @@ const SetProfile = () => {
             code: familyCode,
             userName: nickName,
             familyRole: role,
-            // token 추가해줘야함.
             pushToken: localStorage.getItem("expo_push_token") || "",
         };
         fetch(process.env.REACT_APP_SERVER_URI + "/family/participate", {
@@ -102,6 +101,7 @@ const SetProfile = () => {
                 if (data.ok) {
                     navigate("/sign-up/participate/result", {
                         state: {
+                            // img 받아야함.
                             familyName: data.familyName,
                             token: data.token,
                         },
