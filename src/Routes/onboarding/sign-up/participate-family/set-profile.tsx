@@ -103,6 +103,7 @@ const SetProfile = () => {
                         state: {
                             // img 받아야함.
                             familyName: data.familyName,
+                            userName: nickName,
                             token: data.token,
                         },
                     });
