@@ -59,10 +59,23 @@ const CheckButton = styled.button`
     font-size: 20px;
     border-radius: 10px;
 `;
+const NoticebBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 327px;
+    height: 240px;
+    flex-shrink: 0;
+    border-radius: 17px;
+    border: 3px solid #a2c9a1;
+    background: #fafff1;
+`;
 const ParticipateFamily = () => {
     const navigate = useNavigate();
     const [familyCode, setFamilyCode] = useState("");
-    const [canGoNext, setCanGoNext] = useState(false);
+    const [isAuthed, setIsAuthed] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     const onClickButton = () => {
         navigate("/sign-up/participate/set-profile", {
             state: {
@@ -84,8 +97,8 @@ const ParticipateFamily = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
-                    alert("확인되었습니다! 잠시만 기다려주세요!");
-                    setCanGoNext(true);
+                    setIsAuthed(true);
+                    setOpenModal(true);
                 }
             })
             .catch((e) => console.log(e));
@@ -95,10 +108,20 @@ const ParticipateFamily = () => {
         <Contanier>
             <Logo src={EehoLogo} />
             <Title>가족 초대 코드 입력</Title>
-            <Text>공유받은 가족 코드를 입력해주세요~</Text>
-            <CodeInput value={familyCode} onChange={(v) => setFamilyCode(v.target.value)} />
-            <CheckButton onClick={onClickCheck}>확인</CheckButton>
-            {canGoNext ? <Button text="다 음" onClick={onClickButton} /> : <Button text="코드를 먼저 입력해주세요!" />}
+
+            {openModal ? (
+                <NoticebBox>
+                    <Title>인증되었습니다.</Title>
+                    <CheckButton onClick={() => setOpenModal(false)}>닫기</CheckButton>
+                </NoticebBox>
+            ) : (
+                <>
+                    <Text>공유받은 가족 코드를 입력해주세요~</Text>
+                    <CodeInput value={familyCode} onChange={(v) => setFamilyCode(v.target.value)} />
+                    <CheckButton onClick={onClickCheck}>확인</CheckButton>
+                </>
+            )}
+            {isAuthed ? <Button text="다 음" onClick={onClickButton} /> : <Button text="코드를 먼저 입력해주세요!" />}
         </Contanier>
     );
 };
