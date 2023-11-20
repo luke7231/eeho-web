@@ -13,9 +13,6 @@ const Container = styled.div`
 `;
 
 const Home = () => {
-    const onClick = () => {
-        window.ReactNativeWebView.postMessage("camera");
-    };
     return (
         <Container>
             <Header />
