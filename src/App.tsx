@@ -4,7 +4,8 @@ import Router from "./router";
 import styled from "styled-components";
 import { getResponsiveMaxWidth } from "./utils/layout-util";
 import { AuthProvider } from "./contexts/auth-provider";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const Wrapper = styled.section`
     height: 100%;
     width: 100%;
@@ -21,6 +22,7 @@ window.addEventListener("message", (event) => {
 function App() {
     return (
         <>
+            <ToastContainer />
             <AuthProvider>
                 <GlobalStyle />
                 <Wrapper>

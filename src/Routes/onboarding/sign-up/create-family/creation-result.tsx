@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Zoom, toast } from "react-toastify";
 
 const Contanier = styled.div`
     width: 100%;
@@ -88,7 +89,18 @@ const CreationResult = () => {
             <CopyTextBox>
                 www.google.com <Margin /> 코드: {familyCode}
             </CopyTextBox>
-            <CopyToClipboard text={copyText} onCopy={() => alert("복사가 완료되었습니다!")}>
+            <CopyToClipboard
+                text={copyText}
+                onCopy={() =>
+                    toast("복사가 완료되었습니다!", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    })
+                }
+            >
                 <CheckButton>복사</CheckButton>
             </CopyToClipboard>
 

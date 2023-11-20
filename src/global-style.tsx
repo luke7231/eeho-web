@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { getResponsiveMaxWidth } from "./utils/layout-util";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -36,6 +37,64 @@ const GlobalStyle = createGlobalStyle`
         background: transparent;
         cursor: pointer;
     }
+    .Toastify__toast-container {
+        min-height: 48px;
+        width: 100%;
+        ${getResponsiveMaxWidth()}
+        position: fixed;
+        bottom: 57px;
+        pointer-events: none;
+      }
+    
+      .Toastify__toast {
+        min-height: 48px;
+      }
+    
+      .Toastify__toast-body {
+      }
+    
+      .Toastify__progress-bar {
+        display: gray;
+      }
+    
+      .Toastify__close-button {
+        align-self: initial;
+      }
+    
+      .otl_tostify {
+        ${getResponsiveMaxWidth()}
+        background-color: rgba(34, 34, 34, 0.9);
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        min-height: 48px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+      }
+    
+      .not-scroll {
+        overflow: hidden;
+      }
+    
+      .otl_tostify_error {
+        ${getResponsiveMaxWidth()}
+        background-color: #e74c3c;
+        background-color: rgba(231, 76, 60, 0.9);
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        min-height: 48px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        // font-family:  'Montserrat', 'Spoqa Han Sans Neo', sans-serif;;
+      }
+      }
 `;
 
 export default GlobalStyle;
