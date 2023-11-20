@@ -71,7 +71,6 @@ const ParticipateFamily = () => {
         });
     };
     const onClickCheck = () => {
-        alert(familyCode);
         const data = {
             code: familyCode,
         };
@@ -85,10 +84,11 @@ const ParticipateFamily = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
+                    alert("확인되었습니다! 잠시만 기다려주세요!");
                     setCanGoNext(true);
                 }
             })
-            .catch((e) => alert(e));
+            .catch((e) => console.log(e));
     };
 
     return (
