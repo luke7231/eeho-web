@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
     position: absolute;
     bottom: 0;
-    background-color: #a7b387cc;
     width: 100%;
     height: 56px;
     display: grid;
@@ -21,7 +20,6 @@ const TabWrapper = styled.div`
     height: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff80;
 `;
 const Home = styled.img`
     width: 36px;
@@ -35,6 +33,7 @@ const Galary = styled.img`
     width: 26px;
     height: 32px;
 `;
+
 const BottomTab = () => {
     const navigate = useNavigate();
     return (
@@ -42,9 +41,11 @@ const BottomTab = () => {
             <TabWrapper>
                 <Camera src={CameraImg} />
             </TabWrapper>
-            <TabWrapper>
+            {/* <Partition /> */}
+            <TabWrapper style={{ borderRight: "2px solid #CDD4BA", borderLeft: "2px solid #CDD4BA" }}>
                 <Home src={HomeImg} onClick={() => navigate("/notification")} />
             </TabWrapper>
+            {/* <Partition /> */}
             <TabWrapper>
                 <Galary src={GalaryImg} onClick={() => navigate("/settings")} />
             </TabWrapper>
