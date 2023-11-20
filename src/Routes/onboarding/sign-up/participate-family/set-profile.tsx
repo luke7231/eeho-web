@@ -11,10 +11,11 @@ const Contanier = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 48px;
+    padding: 0 64px;
 `;
 const Profile = styled.div`
     position: relative;
+    margin-bottom: 48px;
 `;
 const ProfileImage = styled.img`
     width: 155px;
@@ -30,6 +31,47 @@ const PlusButton = styled.img`
     right: 0;
     position: absolute;
 `;
+
+const InputContainer = styled.div``;
+const Text = styled.div`
+    display: flex;
+    height: 28px;
+    margin: 0 0 10px 4px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #462d2d;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+`;
+const Input = styled.input`
+    background-color: #bcd6ab;
+    height: 36px;
+    border: 0;
+    width: 100%;
+    // text-align: center;
+    padding: 0 10px;
+    font-size: 20px;
+    max-width: 320px;
+    margin-bottom: 38px;
+    border-radius: 10px;
+`;
+const Select = styled.select`
+    background-color: #bcd6ab;
+    height: 36px;
+    border: 0;
+    width: 100%;
+    // text-align: center;
+    padding: 0 10px;
+    font-size: 20px;
+    color: #000;
+    max-width: 320px;
+    margin-bottom: 48px;
+    border-radius: 10px;
+`;
+
 const SetProfile = () => {
     const navigate = useNavigate();
     const {
@@ -77,15 +119,23 @@ const SetProfile = () => {
                 <ProfileImage src={BasicProfile} />
                 <PlusButton src={PlusImg} />
             </Profile>
-            <input value={nickName} onChange={(v) => setNickName(v.target.value)} />
-            <select name="languages" id="lang" onChange={(v) => setRole(v.target.value)}>
-                <option value="아빠">아빠</option>
-                <option value="엄마">엄마</option>
-                <option value="아들">아들</option>
-                <option value="둘째 아들">둘째 아들</option>
-                <option value="딸">딸</option>
-                <option value="둘째 딸">둘째 딸</option>
-            </select>
+
+            <InputContainer>
+                <Text>닉네임</Text>
+                <Input value={nickName} onChange={(v) => setNickName(v.target.value)} />
+
+                <Text>역할</Text>
+                <Select name="languages" id="lang" onChange={(v) => setRole(v.target.value)}>
+                    <option value="아빠">아빠</option>
+                    <option value="엄마">엄마</option>
+                    <option value="첫째 아들">첫째 아들</option>
+                    <option value="둘째 아들">둘째 아들</option>
+                    <option value="셋째 아들">셋째 아들</option>
+                    <option value="첫째 딸">첫째 딸</option>
+                    <option value="둘째 딸">둘째 딸</option>
+                    <option value="셋째 딸">셋째 딸</option>
+                </Select>
+            </InputContainer>
             <Button text="다 음" onClick={onClickButton} />
         </Contanier>
     );
