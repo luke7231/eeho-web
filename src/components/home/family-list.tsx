@@ -1,49 +1,102 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fetchReqEeho } from "../../utils/eeho-api/eeho-req";
-
+import PlusImg from "../../images/icons/plus-button.png";
+import EehoButtonImg from "../../images/icons/EEHO_BUTTOn.png";
+import { Zoom, toast } from "react-toastify";
 interface FamilyMember {
     userName: string;
     userId: string;
     role: string;
-    profileImage: string;
+    profileImg: string;
     pushToken?: string;
 }
-
+interface Sender {
+    familyId: string;
+    isCompleted: boolean;
+    senderId: string;
+}
 const Container = styled.div`
     display: flex;
     gap: 20px;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+`;
+const FamilyName = styled.div`
+    display: flex;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+    align-items: center;
+    max-width: 208px;
+    justify-content: center;
+    background-color: #bfd4b8;
+    height: 33px;
+    color: #1c3411;
+
+    font-size: 16px;
+    font-weight: 800;
+`;
+const FamilyMembers = styled.div`
+    margin-top: 36px;
+    display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    // grid-gap: 20px;
+    // align-items: center;
+    grid-template-columns: repeat(3, minmax(72px, 1fr));
+    grid-gap: 20px;
+    grid-auto-flow: dense;
+    align-items: center;
     justify-content: center;
 `;
-const Circle = styled.div<{ isSelected: boolean }>`
-    width: 48px;
-    height: 48px;
+const Member = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+const PlusButton = styled.img`
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: ${({ isSelected }) => (isSelected ? "orange" : "skyBlue")};
+`;
+const ProfileImg = styled.img<{ isSelected: boolean; isReceived: boolean }>`
+    border: 1px solid #000;
+    border: ${({ isSelected }) => (isSelected ? "4px solid #5A7439" : "")};
+    border: ${({ isReceived }) => (isReceived ? "4px solid #FFD260" : "")};
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+`;
+const Name = styled.div`
+    margin-top: 7px;
+    color: #462d2d;
+    font-size: 14px;
+
+    font-weight: 800;
+`;
+const EehoButtonContainer = styled.div`
+    margin-top: 71px;
+`;
+const EehoButton = styled.img`
+    margin-top: 48px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #5a7439;
 `;
 const FamilyList = () => {
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
+    const [commonUserIds, setCommonUserIds] = useState<string[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
-    const handleMemberClick = (member: FamilyMember) => {
-        const isMemberSelected = selectedMembers.includes(member);
 
-        setSelectedMembers((prevSelectedMembers) =>
-            isMemberSelected
-                ? prevSelectedMembers.filter((selectedMember) => selectedMember !== member)
-                : [...prevSelectedMembers, member],
-        );
-    };
-    const onClickEeho = () => {
-        const payload = {
-            type: "camera_open",
-            payload: { token: localStorage.getItem("jwt"), userIds: selectedMembers.map((m) => m.userId) },
-        };
-        window.ReactNativeWebView.postMessage(JSON.stringify(payload));
-    };
+    //fetch
     useEffect(() => {
         const token = localStorage.getItem("jwt") as string;
-
         fetch(process.env.REACT_APP_SERVER_URI + "/main/members", {
             headers: {
                 "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
@@ -67,30 +120,104 @@ const FamilyList = () => {
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
                 console.log(data, "노란원");
+                const commonIds = data.data
+                    .map((aItem: Sender) => aItem.senderId)
+                    .filter((senderId: string) => family.filter((bItem) => bItem.userId === senderId));
+                setCommonUserIds(commonIds);
             })
             .catch((e) => console.log(e));
     }, []);
+
+    const onClickReceivedEeho = (userIds: string[]) => {
+        const payload = {
+            type: "camera_open",
+            payload: { token: localStorage.getItem("jwt"), userIds },
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+    };
+
+    const handleMemberClick = (member: FamilyMember) => {
+        const isMemberSelected = selectedMembers.includes(member);
+        const isReceived = commonUserIds.includes(member.userId);
+
+        if (isReceived) {
+            onClickReceivedEeho([member.userId]);
+        } else {
+            setSelectedMembers((prevSelectedMembers) =>
+                isMemberSelected
+                    ? prevSelectedMembers.filter((selectedMember) => selectedMember !== member)
+                    : [...prevSelectedMembers, member],
+            );
+        }
+    };
+
+    const onClickSendEeho = async () => {
+        if (selectedMembers.length === 0) {
+            toast("에호를 보낼 가족을 선택해주세요!", {
+                position: "bottom-center",
+                transition: Zoom,
+                className: "otl_tostify_error",
+                autoClose: 1000,
+                hideProgressBar: true,
+            });
+        } else {
+            const usernames = selectedMembers.map((m) => m.userId);
+            const token = localStorage.getItem("jwt");
+            if (token) {
+                const res = await fetchReqEeho(usernames, token);
+                console.log(res);
+            }
+            toast("에호가 전송되었습니다!", {
+                position: "bottom-center",
+                transition: Zoom,
+                className: "otl_tostify",
+                autoClose: 1000,
+                hideProgressBar: true,
+            });
+            setSelectedMembers([]);
+        }
+    };
+
+    const renderFamilyMember = (member: FamilyMember) => {
+        const isReceived = commonUserIds.includes(member.userId);
+        return (
+            <Member
+                key={member.userId}
+                onClick={() => (isReceived ? onClickReceivedEeho([member.userId]) : handleMemberClick(member))}
+            >
+                <ProfileImg
+                    src={member.profileImg}
+                    isSelected={selectedMembers.includes(member)}
+                    isReceived={commonUserIds.includes(member.userId)}
+                />
+                <Name>{member.userName}</Name>
+            </Member>
+        );
+    };
+
+    const renderEmptyMember = (index: number) => (
+        <Member key={index}>
+            <div style={{ width: "72px", height: "92px" }}></div>
+        </Member>
+    );
+
     if (!family) return null;
-    // const onClickEeho = async () => {
-    //     const usernames = selectedMembers.map((m) => m.userId);
-    //     const token = localStorage.getItem("jwt");
-    //     if (token) {
-    //         const res = await fetchReqEeho(usernames, token);
-    //         console.log(res);
-    //     }
-    // };
 
     return (
         <Container>
-            {family.map((member) => (
-                <div key={member.userId} onClick={() => handleMemberClick(member)}>
-                    <Circle isSelected={selectedMembers.includes(member)} />
-                    <div>{member.userName}</div>
-                </div>
-            ))}
-            <button style={{ width: 100, height: 100, backgroundColor: "gray" }} onClick={onClickEeho}>
-                EEHOasdasd
-            </button>
+            <FamilyName>가족이름</FamilyName>
+            <FamilyMembers>
+                {family.map((member) => renderFamilyMember(member))}
+                {Array.from({ length: Math.max(5 - family?.length, 0) }).map((_, index) => renderEmptyMember(index))}
+                <Member>
+                    <PlusButton src={PlusImg} />
+                    {/* <Space></Space> */}
+                </Member>
+            </FamilyMembers>
+
+            <EehoButtonContainer onClick={onClickSendEeho}>
+                <EehoButton src={EehoButtonImg} />
+            </EehoButtonContainer>
         </Container>
     );
 };

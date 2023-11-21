@@ -4,7 +4,7 @@ import Eeho from "../images/icons/eeho_green.png";
 import Menu from "../images/icons/burger.png";
 import { useNavigate } from "react-router-dom";
 const Container = styled.div`
-    position: absolute;
+    position: relative;
     top: 0;
     width: 100%;
     display: flex;
@@ -20,6 +20,9 @@ const Logo = styled.img`
     width: 77px;
     height: 50px;
 `;
+const MenuBox = styled.div`
+    width: 30px;
+`;
 const MenuButton = styled.img`
     width: 20px;
     height: 21px;
@@ -30,7 +33,9 @@ const Header = () => {
         <Container>
             <Notification src={Noti} onClick={() => navigate("/notification")} />
             <Logo src={Eeho} />
-            <MenuButton src={Menu} onClick={() => navigate("/settings")} />
+            <MenuBox>
+                <MenuButton src={Menu} onClick={() => navigate("/settings")} />
+            </MenuBox>
         </Container>
     );
 };
