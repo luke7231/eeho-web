@@ -19,6 +19,9 @@ import CreationResult from "./Routes/onboarding/sign-up/create-family/creation-r
 import ParticipateFamily from "./Routes/onboarding/sign-up/participate-family/participate-family";
 import ParticipationResult from "./Routes/onboarding/sign-up/participate-family/participation-result";
 import Send from "./Routes/send";
+import Setting from "./Routes/setting";
+import UpdateProfile from "./Routes/setting/updata-profile";
+import CopyLink from "./Routes/setting/copy-link";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -47,6 +50,9 @@ const Router = () => {
                 <Route path="/notification" element={<Notification />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/send" element={<Send />} />
+                <Route path="/setting" element={<Setting />} />
+                <Route path="/setting/update_profile" element={<UpdateProfile />} />
+                <Route path="/setting/copy_link" element={<CopyLink />} />
             </Routes>
         </BrowserRouter>
     );
