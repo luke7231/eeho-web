@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import styled from "styled-components";
 import { FadeInWrapper } from "../../../../components/onboarding/fade-in-wrapper";
+import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -69,7 +70,7 @@ const ParticipationResult = () => {
             payload: { token },
         };
         window.ReactNativeWebView.postMessage(JSON.stringify(payload));
-
+        tellClearHistory();
         login();
         navigate("/");
     };

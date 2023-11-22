@@ -5,6 +5,7 @@ import styled from "styled-components";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Zoom, toast } from "react-toastify";
+import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
 
 const Contanier = styled.div`
     width: 100%;
@@ -80,7 +81,7 @@ const CreationResult = () => {
             payload: { token },
         };
         window.ReactNativeWebView.postMessage(JSON.stringify(payload));
-
+        tellClearHistory();
         login();
         navigate("/");
     };

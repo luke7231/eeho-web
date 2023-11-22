@@ -5,6 +5,7 @@ import Profile from "./profile";
 import { useState } from "react";
 import { Zoom, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { tellClearHistory } from "../../utils/eeho-api/bridge-handler";
 
 const Container = styled.div`
     width: 100%;
@@ -121,6 +122,7 @@ const Setting = () => {
             .then((r) => r.json())
             .then((data) => {
                 if (data.ok) {
+                    tellClearHistory();
                     localStorage.removeItem("jwt");
                     toast("계정이 성공적으로 삭제 되었습니다.", {
                         position: "bottom-center",

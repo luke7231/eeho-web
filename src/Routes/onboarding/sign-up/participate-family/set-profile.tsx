@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import BasicProfile from "../../../../images/icons/basic-profile-img.png";
 import PlusImg from "../../../../images/icons/plus-button.png";
+import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -98,6 +99,7 @@ const SetProfile = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
+                    tellClearHistory();
                     navigate("/sign-up/participate/result", {
                         state: {
                             // img 받아야함.
