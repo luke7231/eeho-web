@@ -67,12 +67,11 @@ const SetProfile = () => {
             role,
             pushToken: localStorage.getItem("expo_push_token") || "",
         };
-        fetch(process.env.REACT_APP_SERVER_URI + "/family/create", {
+        fetch("/family/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            mode: "no-cors",
             body: JSON.stringify(data),
         })
             .then((response) => response.json())
