@@ -1,10 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./Routes/home";
-import Onboarding from "./Routes/onboarding";
 import { useAuth } from "./contexts/auth-provider";
 import Agree from "./Routes/onboarding/agree";
 import KakaoRedirection from "./Routes/onboarding/kakao-redirection";
-import Notification from "./Routes/notification";
 import Posts from "./Routes/posts";
 import Intro1 from "./Routes/onboarding/introduction/intro-1";
 import Intro2 from "./Routes/onboarding/introduction/intro-2";
@@ -47,7 +45,6 @@ const Router = () => {
 
                 <Route path="/auth" element={<KakaoRedirection />} />
                 <Route path="/onboarding/agree" element={<Agree />} />
-                <Route path="/notification" element={<Notification />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/send" element={<Send />} />
                 <Route path="/setting" element={<Setting />} />
