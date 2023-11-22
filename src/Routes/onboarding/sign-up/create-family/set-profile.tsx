@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
-import BasicProfile from "../../../../images/icons/basic-profile-img.png";
-import PlusImg from "../../../../images/icons/plus-button.png";
 import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
 
 const Contanier = styled.div`
@@ -15,25 +13,6 @@ const Contanier = styled.div`
     align-items: center;
     padding: 0 64px;
 `;
-const Profile = styled.div`
-    position: relative;
-    margin-bottom: 48px;
-`;
-const ProfileImage = styled.img`
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    border: 9px solid #95b485;
-`;
-const PlusButton = styled.img`
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-`;
-
 const InputContainer = styled.div``;
 const Text = styled.div`
     display: flex;
@@ -93,6 +72,7 @@ const SetProfile = () => {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify(data),
         })
             .then((response) => response.json())
@@ -115,10 +95,6 @@ const SetProfile = () => {
 
     return (
         <Contanier>
-            <Profile>
-                <ProfileImage src={BasicProfile} />
-                <PlusButton src={PlusImg} />
-            </Profile>
             <InputContainer>
                 <Text>닉네임</Text>
                 <Input value={nickName} onChange={(v) => setNickName(v.target.value)} />
