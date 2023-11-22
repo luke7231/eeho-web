@@ -103,6 +103,7 @@ const UpdateProfile = () => {
                         hideProgressBar: true,
                     });
                     navigate("/");
+                    window.location.reload();
                 } else {
                     toast("변경 상에 오류가 생겼습니다.", {
                         position: "bottom-center",
