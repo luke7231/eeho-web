@@ -72,7 +72,7 @@ const SetProfile = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
+            mode: "no-cors",
             body: JSON.stringify(data),
         })
             .then((response) => response.json())
