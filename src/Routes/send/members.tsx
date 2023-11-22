@@ -52,7 +52,7 @@ const Members = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("jwt") as string;
-        fetch(process.env.REACT_APP_SERVER_URI + "/main/members", {
+        fetch(process.env.REACT_APP_SERVER_URI + "/main/members?exceptMe=true", {
             headers: {
                 "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
                 token: token,
