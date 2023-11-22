@@ -19,7 +19,7 @@ const processIsLoggedIn = () => {
 };
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(processIsLoggedIn);
 
     const login = () => {
         // 로그인 로직 구현 (예: 사용자 인증)
