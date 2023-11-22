@@ -79,11 +79,12 @@ const SetProfile = () => {
     } = useLocation();
     const [nickName, setNickName] = useState("");
     const [role, setRole] = useState("아빠");
+
     const onClickButton = async () => {
         const data = {
             familyName,
             userName: nickName,
-            familyRole: role,
+            role,
             pushToken: localStorage.getItem("expo_push_token") || "",
         };
         fetch(process.env.REACT_APP_SERVER_URI + "/family/create", {
@@ -98,6 +99,7 @@ const SetProfile = () => {
                 if (data.ok) {
                     navigate("/sign-up/create/result", {
                         state: {
+                            id: data.id,
                             familyCode: data.code,
                             token: data.token,
                         },

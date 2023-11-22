@@ -66,7 +66,12 @@ const CreateFamily = () => {
             <Title>가족 이름 설정</Title>
             <Text>우리 가족의 이름을 설정해 주세요. 가족구성원 모두에게 표시됩니다.</Text>
             <CodeInput value={familyName} onChange={(v) => setFamilyName(v.target.value)} />
-            <Button text="다 음" onClick={onClickButton} />
+
+            {familyName !== "" ? (
+                <Button text="다 음" onClick={onClickButton} />
+            ) : (
+                <Button text="가족 이름 입력해주세요!" />
+            )}
         </Contanier>
     );
 };

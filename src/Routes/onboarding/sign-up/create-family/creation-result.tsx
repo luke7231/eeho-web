@@ -69,11 +69,18 @@ const CreationResult = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const {
-        state: { familyCode, token },
+        state: { familyCode, token, id },
     } = useLocation();
 
     const onClickButton = () => {
         localStorage.setItem("jwt", token);
+        localStorage.setItem("id", id);
+        const payload = {
+            type: "store_token",
+            payload: { token },
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+
         login();
         navigate("/");
     };

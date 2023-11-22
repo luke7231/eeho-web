@@ -85,7 +85,7 @@ const SetProfile = () => {
         const data = {
             code: familyCode,
             userName: nickName,
-            familyRole: role,
+            role,
             pushToken: localStorage.getItem("expo_push_token") || "",
         };
         fetch(process.env.REACT_APP_SERVER_URI + "/family/participate", {
@@ -97,11 +97,12 @@ const SetProfile = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                // familyname, token, 알림메시지
                 if (data.ok) {
                     navigate("/sign-up/participate/result", {
                         state: {
                             // img 받아야함.
+                            id: data.id,
+                            profileImg: data.profileImg,
                             familyName: data.familyName,
                             userName: nickName,
                             token: data.token,
@@ -137,7 +138,11 @@ const SetProfile = () => {
                     <option value="셋째 딸">셋째 딸</option>
                 </Select>
             </InputContainer>
-            <Button text="다 음" onClick={onClickButton} />
+            {nickName !== "" ? (
+                <Button text="다 음" onClick={onClickButton} />
+            ) : (
+                <Button text="닉네임을 입력해주세요!" />
+            )}
         </Contanier>
     );
 };

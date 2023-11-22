@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import styled from "styled-components";
 import BasicProfile from "../../../../images/icons/basic-profile-img.png";
+import { FadeInWrapper } from "../../../../components/onboarding/fade-in-wrapper";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -57,12 +58,19 @@ const ParticipationResult = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const {
-        state: { familyName, token, userName },
+        state: { familyName, token, userName, profileImg, id },
     } = useLocation();
     console.log(familyName);
 
     const onClickButton = () => {
         localStorage.setItem("jwt", token);
+        localStorage.setItem("id", id);
+        const payload = {
+            type: "store_token",
+            payload: { token },
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+
         login();
         navigate("/");
     };
@@ -71,7 +79,9 @@ const ParticipationResult = () => {
             <Logo src={EehoLogo} />
             <FamilyName>{familyName}</FamilyName>
             <Profile>
-                <ProfileImage src={BasicProfile} />
+                <FadeInWrapper>
+                    <ProfileImage src={profileImg} />
+                </FadeInWrapper>
             </Profile>
             <Text>
                 ` {userName} `님은
