@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FamilyMember } from "../../components/home/family-list";
-import basicImgUrl from "../../images/icons/basic-profile-img.png";
 import styled from "styled-components";
 
 const List = styled.div`

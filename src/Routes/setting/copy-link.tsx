@@ -1,6 +1,3 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth-provider";
-import Button from "../../components/onboarding/button";
 import styled from "styled-components";
 import EehoLogo from "../../images/icons/EEHO.png";
 import { CopyToClipboard } from "react-copy-to-clipboard";

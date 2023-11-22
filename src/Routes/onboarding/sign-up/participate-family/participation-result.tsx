@@ -3,7 +3,6 @@ import { useAuth } from "../../../../contexts/auth-provider";
 import Button from "../../../../components/onboarding/button";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import styled from "styled-components";
-import BasicProfile from "../../../../images/icons/basic-profile-img.png";
 import { FadeInWrapper } from "../../../../components/onboarding/fade-in-wrapper";
 const Contanier = styled.div`
     width: 100%;

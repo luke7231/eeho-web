@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Intro3Img from "../../../images/icons/onboarding4-img.png";
 import Title, { GreenText } from "../../../components/onboarding/title";
 import Text from "../../../components/onboarding/text";

@@ -90,6 +90,7 @@ const Setting = () => {
         setOpenModal(false);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const stopPropagation = (e: any) => {
         e.stopPropagation();
     };
