@@ -47,39 +47,9 @@ const Btn = styled.div`
     text-align: center;
 `;
 
-const gaFamily = [
-    {
-        userName: "엄마",
-        userId: "123",
-        role: "엄마",
-        profileImg: basicImgUrl,
-        pushToken: "ExponentPushToken[czMRa_ITtkRtBgpixu8ByL]",
-    },
-    {
-        userName: "아빠",
-        userId: "1234",
-        role: "아빠",
-        profileImg: basicImgUrl,
-        pushToken: "ExponentPushToken[czMRa_ITtkRtBgpixu8ByL]",
-    },
-    {
-        userName: "딸",
-        userId: "123",
-        role: "딸",
-        profileImg: basicImgUrl,
-        pushToken: "ExponentPushToken[czMRa_ITtkRtBgpixu8ByL]",
-    },
-    {
-        userName: "아들",
-        userId: "123",
-        role: "아들",
-        profileImg: basicImgUrl,
-        pushToken: "ExponentPushToken[czMRa_ITtkRtBgpixu8ByL]",
-    },
-];
 const Members = () => {
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
-    const [family, setFamily] = useState<FamilyMember[]>(gaFamily);
+    const [family, setFamily] = useState<FamilyMember[]>([]);
 
     useEffect(() => {
         const token = localStorage.getItem("jwt") as string;
@@ -92,8 +62,7 @@ const Members = () => {
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
-                // setFamily(data.data);
-                console.log(data);
+                setFamily(data.data);
             });
     }, []);
 
@@ -105,6 +74,14 @@ const Members = () => {
                 ? prevSelectedMembers.filter((selectedMember) => selectedMember !== member)
                 : [...prevSelectedMembers, member],
         );
+    };
+
+    const onClickButton = () => {
+        const payload = {
+            type: "camera_open",
+            payload: { token: localStorage.getItem("jwt"), userIds: selectedMembers.map((member) => member.userId) },
+        };
+        window.ReactNativeWebView.postMessage(JSON.stringify(payload));
     };
     return (
         <>
@@ -118,9 +95,15 @@ const Members = () => {
                     );
                 })}
             </List>
-            <ButtonCon>
-                <Btn onClick={() => console.log(selectedMembers)}>사진 보내기</Btn>
-            </ButtonCon>
+            {selectedMembers.length !== 0 ? (
+                <ButtonCon>
+                    <Btn onClick={() => onClickButton()}>사진 보내기</Btn>
+                </ButtonCon>
+            ) : (
+                <ButtonCon>
+                    <Btn onClick={() => onClickButton()}>가족을 선택해주세요!</Btn>
+                </ButtonCon>
+            )}
         </>
     );
 };
