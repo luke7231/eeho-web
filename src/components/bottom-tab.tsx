@@ -4,7 +4,7 @@ import CameraImg from "../images/icons/camera_icon.png";
 import GalaryImg from "../images/icons/galary_icon.png";
 import { useNavigate } from "react-router-dom";
 const Container = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 56px;
@@ -13,6 +13,7 @@ const Container = styled.div`
     grid-gap: 4px;
     align-items: center;
     padding: 4px;
+    background-color: #fafff1;
 `;
 const TabWrapper = styled.div`
     display: flex;
@@ -39,15 +40,15 @@ const BottomTab = () => {
     return (
         <Container>
             <TabWrapper>
-                <Camera src={CameraImg} />
+                <Camera src={CameraImg} onClick={() => navigate("/send")} />
             </TabWrapper>
             {/* <Partition /> */}
             <TabWrapper style={{ borderRight: "2px solid #CDD4BA", borderLeft: "2px solid #CDD4BA" }}>
-                <Home src={HomeImg} onClick={() => navigate("/notification")} />
+                <Home src={HomeImg} onClick={() => navigate("/")} />
             </TabWrapper>
             {/* <Partition /> */}
             <TabWrapper>
-                <Galary src={GalaryImg} onClick={() => navigate("/settings")} />
+                <Galary src={GalaryImg} onClick={() => navigate("/posts")} />
             </TabWrapper>
         </Container>
     );
