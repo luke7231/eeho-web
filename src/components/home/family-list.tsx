@@ -4,7 +4,8 @@ import { fetchReqEeho } from "../../utils/eeho-api/eeho-req";
 import PlusImg from "../../images/icons/plus-button.png";
 import EehoButtonImg from "../../images/icons/EEHO_BUTTOn.png";
 import { Zoom, toast } from "react-toastify";
-interface FamilyMember {
+import { useNavigate } from "react-router-dom";
+export interface FamilyMember {
     userName: string;
     userId: string;
     role: string;
@@ -90,6 +91,7 @@ const EehoButton = styled.img`
     border: 4px solid #5a7439;
 `;
 const FamilyList = () => {
+    const navigate = useNavigate();
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
     const [commonUserIds, setCommonUserIds] = useState<string[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
@@ -139,7 +141,10 @@ const FamilyList = () => {
     const handleMemberClick = (member: FamilyMember) => {
         const isMemberSelected = selectedMembers.includes(member);
         const isReceived = commonUserIds.includes(member.userId);
-
+        const myId = localStorage.getItem("id");
+        if (myId == member.userId) {
+            navigate("/setting");
+        }
         if (isReceived) {
             onClickReceivedEeho([member.userId]);
         } else {
@@ -179,12 +184,8 @@ const FamilyList = () => {
     };
 
     const renderFamilyMember = (member: FamilyMember) => {
-        const isReceived = commonUserIds.includes(member.userId);
         return (
-            <Member
-                key={member.userId}
-                onClick={() => (isReceived ? onClickReceivedEeho([member.userId]) : handleMemberClick(member))}
-            >
+            <Member key={member.userId} onClick={() => handleMemberClick(member)}>
                 <ProfileImg
                     src={member.profileImg}
                     isSelected={selectedMembers.includes(member)}
@@ -209,10 +210,7 @@ const FamilyList = () => {
             <FamilyMembers>
                 {family.map((member) => renderFamilyMember(member))}
                 {Array.from({ length: Math.max(5 - family?.length, 0) }).map((_, index) => renderEmptyMember(index))}
-                <Member>
-                    <PlusButton src={PlusImg} />
-                    {/* <Space></Space> */}
-                </Member>
+                <Member>{family.length < 5 ? <PlusButton src={PlusImg} /> : null}</Member>
             </FamilyMembers>
 
             <EehoButtonContainer onClick={onClickSendEeho}>
