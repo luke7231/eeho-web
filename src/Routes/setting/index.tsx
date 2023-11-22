@@ -66,14 +66,31 @@ const ModalContainer = styled.div`
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 2;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 600;
 `;
 
 const ModalContent = styled.div``;
 
+const ModalButtonCon = styled.div`
+    display: flex;
+    margin-top: 20px;
+`;
 const ModalButton = styled.button`
     margin-right: 10px;
     height: 38px;
     background-color: #627d50;
+    border-radius: 7px;
+    padding: 0 12px;
 `;
 const NoButton = styled(ModalButton)`
     background-color: gray;
@@ -140,9 +157,14 @@ const Setting = () => {
                 <>
                     <Backdrop onClick={closeSignOutModal} />
                     <ModalContainer onClick={(e) => stopPropagation(e)}>
-                        <ModalContent>정말로 탈퇴하시겠습니까? 가족들과 추억이 사라집니다!</ModalContent>
-                        <ModalButton onClick={() => reqDeleteAccount()}>삭제</ModalButton>
-                        <NoButton onClick={closeSignOutModal}>아니오</NoButton>
+                        <ModalContent>
+                            정말로 탈퇴하시겠습니까?
+                            <br /> 가족들과 추억이 사라집니다!
+                        </ModalContent>
+                        <ModalButtonCon>
+                            <ModalButton onClick={() => reqDeleteAccount()}>삭제</ModalButton>
+                            <NoButton onClick={closeSignOutModal}>아니오</NoButton>
+                        </ModalButtonCon>
                     </ModalContainer>
                 </>
             )}
