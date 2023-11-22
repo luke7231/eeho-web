@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
         background-color: #FAFFF1;
         
         margin-bottom: 100px;
+        
+        ::-webkit-scrollbar {
+          display: none;
+      }
     }
     ol, ul{
         list-style: none;
