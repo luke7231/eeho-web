@@ -52,6 +52,5 @@
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-prettier": "^5.0.1",
         "prettier": "3.1.0"
-    },
-    "proxy": "https://1b3d-210-119-237-46.ngrok-free.app"
+    }
 }
