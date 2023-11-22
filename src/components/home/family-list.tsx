@@ -118,6 +118,7 @@ const FamilyList = () => {
                 token,
                 // 다른 필요한 헤더가 있다면 추가해주세요
             },
+            cache: "reload",
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
