@@ -119,7 +119,7 @@ const UpdateProfile = () => {
                     <option value="셋째 딸">셋째 딸</option>
                 </Select>
             </InputContainer>
-            {nickName !== "" ? (
+            {nickName.trim() !== "" ? (
                 <Button text="변경하기" onClick={onClickButton} />
             ) : (
                 <Button text="변경할 내용을 입력해주세요!" />

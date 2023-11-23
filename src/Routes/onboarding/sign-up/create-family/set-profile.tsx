@@ -115,7 +115,7 @@ const SetProfile = () => {
                 </Select>
             </InputContainer>
             {loading && <FlashLoading style={{ position: "fixed", bottom: 0 }} />}
-            {nickName !== "" ? (
+            {nickName.trim() !== "" ? (
                 <Button
                     text="다 음"
                     onClick={() => {
