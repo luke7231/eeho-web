@@ -5,6 +5,7 @@ import EehoLogo from "../../../../images/icons/EEHO.png";
 import styled from "styled-components";
 import { FadeInWrapper } from "../../../../components/onboarding/fade-in-wrapper";
 import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
+
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -45,13 +46,17 @@ const ProfileImage = styled.img`
 const Text = styled.div`
     height: 75px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0em;
     text-align: center;
     margin-bottom: 20px;
+`;
+const BoldText = styled.span`
+    font-weight: 800;
+    font-size: 18px;
 `;
 
 const ParticipationResult = () => {
@@ -60,7 +65,6 @@ const ParticipationResult = () => {
     const {
         state: { familyName, token, userName, profileImg, id },
     } = useLocation();
-    console.log(familyName);
 
     const onClickButton = () => {
         localStorage.setItem("jwt", token);
@@ -84,8 +88,13 @@ const ParticipationResult = () => {
                 </FadeInWrapper>
             </Profile>
             <Text>
-                ` {userName} `님은
-                <br />` {familyName} `의 구성원이 되었습니다!
+                <div style={{ fontSize: 16 }}>
+                    <BoldText>{userName}</BoldText> 님은
+                </div>
+                <br />
+                <div style={{ fontSize: 16 }}>
+                    <BoldText>{familyName}</BoldText> 의 구성원이 되었습니다!
+                </div>
             </Text>
 
             <Button text="에호 시작하기" onClick={onClickButton} />
