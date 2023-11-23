@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
+import FlashLoading from "../../../../components/common/flash-loading";
 
 const Contanier = styled.div`
     width: 100%;
@@ -54,6 +55,7 @@ const Select = styled.select`
 `;
 const SetProfile = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const {
         state: { familyName },
     } = useLocation();
@@ -61,6 +63,7 @@ const SetProfile = () => {
     const [role, setRole] = useState("아빠");
 
     const onClickButton = async () => {
+        setLoading(true);
         const data = {
             familyName,
             userName: nickName,
@@ -77,6 +80,7 @@ const SetProfile = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
+                    setLoading(false);
                     tellClearHistory();
                     navigate("/sign-up/create/result", {
                         state: {
@@ -110,7 +114,17 @@ const SetProfile = () => {
                     <option value="셋째 딸">셋째 딸</option>
                 </Select>
             </InputContainer>
-            <Button text="다 음" onClick={onClickButton} />
+            {loading && <FlashLoading style={{ position: "fixed", bottom: 0 }} />}
+            {nickName !== "" ? (
+                <Button
+                    text="다 음"
+                    onClick={() => {
+                        if (!loading) onClickButton;
+                    }}
+                />
+            ) : (
+                <Button text="닉네임을 입력해주세요!" />
+            )}
         </Contanier>
     );
 };
