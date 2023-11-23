@@ -119,7 +119,7 @@ const SetProfile = () => {
                 <Button
                     text="다 음"
                     onClick={() => {
-                        if (!loading) onClickButton;
+                        if (!loading) onClickButton();
                     }}
                 />
             ) : (
