@@ -100,7 +100,7 @@ const Members = () => {
                 </ButtonCon>
             ) : (
                 <ButtonCon>
-                    <Btn onClick={() => onClickButton()}>가족을 선택해주세요!</Btn>
+                    <Btn>가족을 선택해주세요!</Btn>
                 </ButtonCon>
             )}
         </>
