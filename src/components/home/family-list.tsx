@@ -92,6 +92,7 @@ const EehoButton = styled.img`
 `;
 const FamilyList = () => {
     const navigate = useNavigate();
+    const [familyName, setFamilyName] = useState("가족이름");
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
     const [commonUserIds, setCommonUserIds] = useState<string[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
@@ -101,22 +102,20 @@ const FamilyList = () => {
         const token = localStorage.getItem("jwt") as string;
         fetch(process.env.REACT_APP_SERVER_URI + "/main/members", {
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
+                "Content-Type": "application/json",
                 token: token,
-                // 다른 필요한 헤더가 있다면 추가해주세요
             },
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
-                setFamily(data.data);
-                console.log(data);
+                setFamily(data.members);
+                setFamilyName(data.familyName);
             });
 
         fetch(process.env.REACT_APP_SERVER_URI + "/main/isCompleted", {
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
+                "Content-Type": "application/json",
                 token,
-                // 다른 필요한 헤더가 있다면 추가해주세요
             },
             cache: "reload",
         })
@@ -204,10 +203,10 @@ const FamilyList = () => {
     );
 
     if (!family) return null;
-
+    console.log(family);
     return (
         <Container>
-            <FamilyName>가족이름</FamilyName>
+            <FamilyName>{familyName}</FamilyName>
             <FamilyMembers>
                 {family.map((member) => renderFamilyMember(member))}
                 {Array.from({ length: Math.max(5 - family?.length, 0) }).map((_, index) => renderEmptyMember(index))}
