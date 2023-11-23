@@ -61,7 +61,7 @@ const Members = () => {
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
-                setFamily(data.data);
+                setFamily(data.members);
             });
     }, []);
 
