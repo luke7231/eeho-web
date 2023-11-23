@@ -211,7 +211,11 @@ const FamilyList = () => {
             <FamilyMembers>
                 {family.map((member) => renderFamilyMember(member))}
                 {Array.from({ length: Math.max(5 - family?.length, 0) }).map((_, index) => renderEmptyMember(index))}
-                <Member>{family.length < 5 ? <PlusButton src={PlusImg} /> : null}</Member>
+                <Member>
+                    {family.length < 5 ? (
+                        <PlusButton src={PlusImg} onClick={() => navigate("/setting/copy_link")} />
+                    ) : null}
+                </Member>
             </FamilyMembers>
 
             <EehoButtonContainer onClick={onClickSendEeho}>
