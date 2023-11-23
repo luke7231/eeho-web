@@ -1,7 +1,10 @@
+import BackButton from "../../components/onboarding/back-button";
+
 const Privacy = () => {
     return (
         <div style={{ fontSize: 24, padding: 14, lineHeight: 1.3 }}>
-            <h1 style={{ fontSize: 34, fontWeight: 800 }}>개인정보처리방침</h1>
+            <BackButton />
+            <h1 style={{ fontSize: 34, fontWeight: 800, marginTop: 50 }}>개인정보처리방침</h1>
             <br />
             <br />
             <div style={{ fontSize: 18 }}>

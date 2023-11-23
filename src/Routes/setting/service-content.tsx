@@ -1,7 +1,10 @@
+import BackButton from "../../components/onboarding/back-button";
+
 const ServiceContent = () => {
     return (
         <div style={{ fontSize: 24, padding: 14, lineHeight: 1.3 }}>
-            <h1 style={{ fontSize: 34, fontWeight: 800 }}>서비스 이용 약관</h1>
+            <BackButton />
+            <h1 style={{ fontSize: 34, fontWeight: 800, marginTop: 50 }}>서비스 이용 약관</h1>
             <h1 style={{ fontSize: 20, fontWeight: 600, color: "gray" }}>2023년 11월 23일 제정</h1>
             <br />
             <br />
