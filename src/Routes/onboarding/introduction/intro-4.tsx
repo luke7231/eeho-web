@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Intro3Img from "../../../images/icons/onboarding3-img.png";
 import Title, { GreenText } from "../../../components/onboarding/title";
 import Text from "../../../components/onboarding/text";
 import Button from "../../../components/onboarding/button";
@@ -27,7 +26,7 @@ const Intro3 = () => {
         <Contanier>
             <BackButton />
             <FadeInWrapper>
-                <Image src={Intro3Img} />
+                <Image src={"https://eeho-b890d.du.r.appspot.com/image/onboarding3-img.png"} />
             </FadeInWrapper>
             <Title style={{ marginTop: 16 }}>
                 <GreenText>에호 답장 </GreenText>

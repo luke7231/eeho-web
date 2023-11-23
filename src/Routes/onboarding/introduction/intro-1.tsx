@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Intro1Img from "../../../images/icons/onboarding1-img.png";
 import Title, { GreenText } from "../../../components/onboarding/title";
 import Text from "../../../components/onboarding/text";
 import Button from "../../../components/onboarding/button";
@@ -23,7 +22,7 @@ const Intro1 = () => {
     };
     return (
         <Contanier>
-            <Image src={Intro1Img} />
+            <Image src={"https://eeho-b890d.du.r.appspot.com/image/onboarding1-img.png"} />
             <Title style={{ marginTop: 40 }}>
                 <GreenText>가족과의 연락</GreenText>, 어떻게 <br /> 하고 계신가요?
             </Title>
