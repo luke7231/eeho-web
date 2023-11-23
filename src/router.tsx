@@ -20,6 +20,8 @@ import Send from "./Routes/send";
 import Setting from "./Routes/setting";
 import UpdateProfile from "./Routes/setting/updata-profile";
 import CopyLink from "./Routes/setting/copy-link";
+import ServiceContent from "./Routes/setting/service-content";
+import Privacy from "./Routes/setting/privacy";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -52,6 +54,8 @@ const Router = () => {
                 <Route path="/setting/copy_link" element={<CopyLink />} />
 
                 <Route path="/agree" element={<Agree />} />
+                <Route path="/service-content" element={<ServiceContent />} />
+                <Route path="/privacy" element={<Privacy />} />
             </Routes>
         </BrowserRouter>
     );
