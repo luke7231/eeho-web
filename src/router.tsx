@@ -50,6 +50,8 @@ const Router = () => {
                 <Route path="/setting" element={<Setting />} />
                 <Route path="/setting/update_profile" element={<UpdateProfile />} />
                 <Route path="/setting/copy_link" element={<CopyLink />} />
+
+                <Route path="/agree" element={<Agree />} />
             </Routes>
         </BrowserRouter>
     );

@@ -7,10 +7,10 @@ const Container = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 0 38px;
 `;
 const TitleSection = styled.div`
-    margin-left: 35px;
-    margin-top: 45px;
+    margin-top: 50px;
 `;
 const Title = styled.div`
     color: #462d2d;
@@ -18,19 +18,23 @@ const Title = styled.div`
     font-style: normal;
     font-weight: 800;
     margin-top: 8px;
+    display: flex;
+    align-items: center;
+    height: 43px;
 `;
 const AgreeContainer = styled.div`
     margin-top: 38px;
-    margin-left: 48px;
 `;
 const CheckWrap = styled.div`
     display: flex;
     align-items: center;
+    margin-bottom: 22px;
 `;
 const CheckBoxContainer = styled.div<{ checked: boolean }>`
     width: 30px;
     height: 30px;
-    background: ${(props) => (props.checked ? "#A7B387" : "#fff")};
+    margin-left: 10px;
+    background: ${(props) => (props.checked ? "#A7B387" : "#eee")};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,11 +46,18 @@ const CheckIcon = styled.img`
 `;
 const CheckBoxText = styled.div`
     color: #462d2d;
-    font-size: 13px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 700;
 `;
 const ButtonContainer = styled.div``;
+const Partition = styled.div`
+    height: 1px;
+    background-color: #462d2d;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 60px;
+`;
 
 const CheckBox = ({ checked, text }: { checked: boolean; text: string }) => {
     return (
@@ -62,11 +73,13 @@ const Agree = () => {
     return (
         <Container>
             <TitleSection>
-                <HLogo color="brown" width={43} height={88} />
+                <HLogo color="green" width={43} height={88} />
                 <Title>에호 약관동의</Title>
             </TitleSection>
             <AgreeContainer>
-                <CheckBox checked={true} text="약관동의1" />
+                <CheckBox checked={true} text="전체동의" />
+                <Partition />
+                <CheckBox checked={true} text="약관동의2" />
                 <CheckBox checked={false} text="약관동의2" />
             </AgreeContainer>
             <ButtonContainer></ButtonContainer>

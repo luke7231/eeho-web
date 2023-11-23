@@ -1,4 +1,4 @@
-type color = "brown";
+type color = "brown" | "green";
 interface Props {
     width: number;
     height: number;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const HLogo = ({ width, height, color, style }: Props) => {
-    const LogoColor = color == "brown" ? "#462D2D" : "#5E7154";
+    const LogoColor = color == "brown" ? "#462D2D" : "#608444";
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
