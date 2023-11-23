@@ -20,7 +20,7 @@ const Intro3 = () => {
     const navigate = useNavigate();
 
     const onClickButton = () => {
-        navigate("/sign-up");
+        navigate("/agree");
     };
     return (
         <Contanier>
