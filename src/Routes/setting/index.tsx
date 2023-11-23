@@ -146,6 +146,13 @@ const Setting = () => {
                 <Tab onClick={() => navigate("./copy_link")}>초대링크</Tab>
                 <Tab
                     onClick={() =>
+                        window.open("https://quirky-moss-44e.notion.site/02050b4cb5d0417ba17e97e270dec0f1?pvs=4")
+                    }
+                >
+                    서비스 이용 약관
+                </Tab>
+                <Tab
+                    onClick={() =>
                         window.open("https://quirky-moss-44e.notion.site/a63167f1501e4c7982f75599e4d4f07b?pvs=4")
                     }
                 >
