@@ -65,13 +65,28 @@ const Partition = styled.div`
     margin-bottom: 60px;
 `;
 
-const CheckBox = ({ onClick, checked, text }: { onClick: () => void; checked: boolean; text: string }) => {
+const CheckBox = ({
+    onClick,
+    checked,
+    text,
+    link,
+}: {
+    onClick: () => void;
+    checked: boolean;
+    text: string;
+    link?: string;
+}) => {
     return (
         <CheckWrap onClick={onClick}>
             <CheckBoxContainer checked={checked}>
                 <CheckIcon src={checked ? VMark : VMarkGreen} />
             </CheckBoxContainer>
             <CheckBoxText>{text}</CheckBoxText>
+            {link && (
+                <a target="_blank" href={link} style={{ marginLeft: 5 }}>
+                    [링크]
+                </a>
+            )}
         </CheckWrap>
     );
 };
@@ -129,11 +144,17 @@ const Agree = () => {
             <AgreeContainer>
                 <CheckBox onClick={handleCheckAll} checked={checkAll} text="전체동의" />
                 <Partition />
-                <CheckBox onClick={handleCheckTerms} checked={checkTerms} text="서비스 이용약관 동의 (필수)" />
+                <CheckBox
+                    onClick={handleCheckTerms}
+                    checked={checkTerms}
+                    text="서비스 이용약관 동의 (필수)"
+                    link="https://quirky-moss-44e.notion.site/02050b4cb5d0417ba17e97e270dec0f1?pvs=4"
+                />
                 <CheckBox
                     onClick={handleCheckPrivacy}
                     checked={checkPrivacy}
                     text="개인정보 수집 및 이용 동의 (필수)"
+                    link="https://quirky-moss-44e.notion.site/a63167f1501e4c7982f75599e4d4f07b?pvs=4"
                 />
                 <CheckBox onClick={handleCheckAge} checked={checkAge} text="만 14세 이상 서비스 이용(필수)" />
             </AgreeContainer>
