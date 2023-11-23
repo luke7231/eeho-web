@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import EehoLogo from "../../../../images/icons/EEHO.png";
+import { Zoom, toast } from "react-toastify";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -99,6 +100,14 @@ const ParticipateFamily = () => {
                 if (data.ok) {
                     setIsAuthed(true);
                     setOpenModal(true);
+                } else {
+                    toast("최대 인원에 도달하였습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify_error",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
                 }
             })
             .catch((e) => console.log(e));
