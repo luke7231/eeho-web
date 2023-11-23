@@ -32,6 +32,9 @@ const GlobalStyle = createGlobalStyle`
         ::-webkit-scrollbar {
           display: none;
       }
+      
+        touch-action: pan-y;
+      
     }
     ol, ul{
         list-style: none;
