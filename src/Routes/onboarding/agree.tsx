@@ -2,6 +2,8 @@ import styled from "styled-components";
 import HLogo from "../../components/logo/h-logo";
 import VMark from "../../images/icons/v_mark.png";
 import VMarkGreen from "../../images/icons/v_mark_green.png";
+import Button from "../../components/onboarding/button";
+import { useState } from "react";
 const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -50,7 +52,10 @@ const CheckBoxText = styled.div`
     font-style: normal;
     font-weight: 700;
 `;
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+    position: fixed;
+    left: 0;
+`;
 const Partition = styled.div`
     height: 1px;
     background-color: #462d2d;
@@ -59,9 +64,9 @@ const Partition = styled.div`
     margin-bottom: 60px;
 `;
 
-const CheckBox = ({ checked, text }: { checked: boolean; text: string }) => {
+const CheckBox = ({ onClick, checked, text }: { onClick: () => void; checked: boolean; text: string }) => {
     return (
-        <CheckWrap>
+        <CheckWrap onClick={onClick}>
             <CheckBoxContainer checked={checked}>
                 <CheckIcon src={checked ? VMark : VMarkGreen} />
             </CheckBoxContainer>
@@ -70,6 +75,38 @@ const CheckBox = ({ checked, text }: { checked: boolean; text: string }) => {
     );
 };
 const Agree = () => {
+    const [checkAll, setCheckAll] = useState(false);
+    const [checkTerms, setCheckTerms] = useState(true);
+    const [checkPrivacy, setCheckPrivacy] = useState(false);
+
+    const handleCheckAll = () => {
+        const newCheckAll = !checkAll;
+        setCheckAll(newCheckAll);
+        setCheckTerms(newCheckAll);
+        setCheckPrivacy(newCheckAll);
+    };
+
+    const handleCheckTerms = () => {
+        setCheckTerms(!checkTerms);
+        if (!checkTerms && checkPrivacy) {
+            setCheckAll(true);
+        } else {
+            setCheckAll(false);
+        }
+    };
+
+    const handleCheckPrivacy = () => {
+        setCheckPrivacy(!checkPrivacy);
+        if (checkTerms && !checkPrivacy) {
+            setCheckAll(true);
+        } else {
+            setCheckAll(false);
+        }
+    };
+
+    const onClickButton = () => {
+        console.log("click button");
+    };
     return (
         <Container>
             <TitleSection>
@@ -77,12 +114,18 @@ const Agree = () => {
                 <Title>에호 약관동의</Title>
             </TitleSection>
             <AgreeContainer>
-                <CheckBox checked={true} text="전체동의" />
+                <CheckBox onClick={handleCheckAll} checked={checkAll} text="전체동의" />
                 <Partition />
-                <CheckBox checked={true} text="약관동의2" />
-                <CheckBox checked={false} text="약관동의2" />
+                <CheckBox onClick={handleCheckTerms} checked={checkTerms} text="서비스 이용약관 동의 (필수)" />
+                <CheckBox
+                    onClick={handleCheckPrivacy}
+                    checked={checkPrivacy}
+                    text="개인정보 수집 및 이용 동의 (필수)"
+                />
             </AgreeContainer>
-            <ButtonContainer></ButtonContainer>
+            <ButtonContainer>
+                <Button text="가족과 에호하러 가기" onClick={onClickButton} />
+            </ButtonContainer>
         </Container>
     );
 };
