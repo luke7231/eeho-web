@@ -4,6 +4,7 @@ import VMark from "../../images/icons/v_mark.png";
 import VMarkGreen from "../../images/icons/v_mark_green.png";
 import Button from "../../components/onboarding/button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -75,20 +76,23 @@ const CheckBox = ({ onClick, checked, text }: { onClick: () => void; checked: bo
     );
 };
 const Agree = () => {
+    const navigate = useNavigate();
     const [checkAll, setCheckAll] = useState(false);
-    const [checkTerms, setCheckTerms] = useState(true);
+    const [checkTerms, setCheckTerms] = useState(false);
     const [checkPrivacy, setCheckPrivacy] = useState(false);
+    const [checkAge, setCheckAge] = useState(false);
 
     const handleCheckAll = () => {
         const newCheckAll = !checkAll;
         setCheckAll(newCheckAll);
         setCheckTerms(newCheckAll);
         setCheckPrivacy(newCheckAll);
+        setCheckAge(newCheckAll);
     };
 
     const handleCheckTerms = () => {
         setCheckTerms(!checkTerms);
-        if (!checkTerms && checkPrivacy) {
+        if (!checkTerms && checkPrivacy && checkAge) {
             setCheckAll(true);
         } else {
             setCheckAll(false);
@@ -97,7 +101,16 @@ const Agree = () => {
 
     const handleCheckPrivacy = () => {
         setCheckPrivacy(!checkPrivacy);
-        if (checkTerms && !checkPrivacy) {
+        if (checkTerms && !checkPrivacy && checkAge) {
+            setCheckAll(true);
+        } else {
+            setCheckAll(false);
+        }
+    };
+
+    const handleCheckAge = () => {
+        setCheckAge(!checkAge);
+        if (checkTerms && checkPrivacy && !checkAge) {
             setCheckAll(true);
         } else {
             setCheckAll(false);
@@ -105,7 +118,7 @@ const Agree = () => {
     };
 
     const onClickButton = () => {
-        console.log("click button");
+        navigate("/sign-up");
     };
     return (
         <Container>
@@ -122,9 +135,10 @@ const Agree = () => {
                     checked={checkPrivacy}
                     text="개인정보 수집 및 이용 동의 (필수)"
                 />
+                <CheckBox onClick={handleCheckAge} checked={checkAge} text="만 14세 이상 서비스 이용(필수)" />
             </AgreeContainer>
             <ButtonContainer>
-                <Button text="가족과 에호하러 가기" onClick={onClickButton} />
+                {checkAll ? <Button text="다 음" onClick={onClickButton} /> : <Button text="모두 동의 해주세요" />}
             </ButtonContainer>
         </Container>
     );
