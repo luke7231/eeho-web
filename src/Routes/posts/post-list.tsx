@@ -77,8 +77,73 @@ const DeleteButton = styled.div`
     align-items: center;
     color: #fff;
 `;
+const Backdrop = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 색상 및 투명도 조절 */
+    z-index: 1; /* 모달 위로 배치 */
+`;
+const ModalContainer = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 208px;
+    transform: translate(-50%, -50%);
+    background-color: #cad5c3;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 600;
+`;
+
+const ModalContent = styled.div``;
+
+const ModalButtonCon = styled.div`
+    display: flex;
+    margin-top: 20px;
+`;
+const ModalButton = styled.button`
+    margin-right: 10px;
+    height: 38px;
+    background-color: #627d50;
+    border-radius: 7px;
+    padding: 0 12px;
+    color: black;
+`;
+const NoButton = styled(ModalButton)`
+    background-color: gray;
+`;
+
 const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+    const [selectedImageId, setSelectedImageId] = useState("");
+
+    const openModal = () => {
+        setIsOpenDeleteModal(true);
+    };
+    const closeModal = () => {
+        setIsOpenDeleteModal(false);
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const stopPropagation = (e: any) => {
+        e.stopPropagation();
+    };
+
     useEffect(() => {
         fetch(process.env.REACT_APP_SERVER_URI + "/album/image/index/user", {
             headers: {
@@ -91,7 +156,7 @@ const PostList = () => {
                 setList(data.data);
             });
     }, []);
-    const onClickDelete = (id: string) => {
+    const reqDeleteImage = (id: string) => {
         fetch(process.env.REACT_APP_SERVER_URI + `/album/image/delete/${id}`, {
             headers: {
                 token: localStorage.getItem("jwt") as string,
@@ -100,13 +165,6 @@ const PostList = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.ok) {
-                    toast("사진이 성공적으로 삭제 되었습니다.", {
-                        position: "bottom-center",
-                        transition: Zoom,
-                        className: "otl_tostify",
-                        autoClose: 1000,
-                        hideProgressBar: true,
-                    });
                     window.location.reload();
                 } else {
                     toast("네트워크에 문제가 발생했습니다.", {
@@ -135,13 +193,37 @@ const PostList = () => {
                             {member.photo.map((p) => (
                                 <PostWrap>
                                     <PostImg src={p.img} />
-                                    {p.isMine && <DeleteButton onClick={() => onClickDelete(p._id)}>x</DeleteButton>}
+                                    {p.isMine && (
+                                        <DeleteButton
+                                            onClick={() => {
+                                                setSelectedImageId(p._id);
+                                                openModal();
+                                            }}
+                                        >
+                                            x
+                                        </DeleteButton>
+                                    )}
                                 </PostWrap>
                             ))}
                         </PostContainer>
                     </Posts>
                 );
             })}
+            {isOpenDeleteModal && (
+                <>
+                    <Backdrop onClick={closeModal} />
+                    <ModalContainer onClick={(e) => stopPropagation(e)}>
+                        <ModalContent>
+                            사진을 삭제하시겠습니까?
+                            <br /> 상대방도 볼 수 없게 됩니다.
+                        </ModalContent>
+                        <ModalButtonCon>
+                            <ModalButton onClick={() => reqDeleteImage(selectedImageId)}>삭제</ModalButton>
+                            <NoButton onClick={closeModal}>아니오</NoButton>
+                        </ModalButtonCon>
+                    </ModalContainer>
+                </>
+            )}
         </Container>
     );
 };
