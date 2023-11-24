@@ -5,6 +5,7 @@ import Button from "../../../components/onboarding/button";
 import BackButton from "../../../components/onboarding/back-button";
 import { tellClearHistory } from "../../../utils/eeho-api/bridge-handler";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/auth-provider";
 
 const Contanier = styled.div`
     width: 100%;
@@ -42,6 +43,7 @@ const Input = styled.input`
 `;
 
 const Login = () => {
+    const { login } = useAuth();
     const [loading, setLoading] = useState(false);
     const [familyCode, setFamilyCode] = useState("");
     const [nickName, setNickName] = useState("");
@@ -76,14 +78,9 @@ const Login = () => {
                     window.ReactNativeWebView.postMessage(JSON.stringify(payload));
                     // 뒤로 못 돌아가게 해라.
                     tellClearHistory();
+                    login();
                     // 홈으로 보낸다.
-                    navigate("/", {
-                        state: {
-                            id: data.id,
-                            familyCode: data.code,
-                            token: data.token,
-                        },
-                    });
+                    navigate("/");
                 }
             })
             .catch((error) => {
