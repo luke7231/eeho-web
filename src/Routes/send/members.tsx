@@ -45,7 +45,16 @@ const Btn = styled.div`
     font-weight: 600;
     text-align: center;
 `;
-
+const NoContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    line-height: 22px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+`;
 const Members = () => {
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
@@ -84,6 +93,12 @@ const Members = () => {
     };
     return (
         <>
+            {family.length === 0 && (
+                <NoContent>
+                    이 곳은 사진을 보낼
+                    <br /> 가족을 선택하는 페이지 입니다. <br /> 가족을 초대하여 사진을 공유해봐요!
+                </NoContent>
+            )}
             <List>
                 {family?.map((member) => {
                     return (

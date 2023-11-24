@@ -127,6 +127,16 @@ const ModalButton = styled.button`
 const NoButton = styled(ModalButton)`
     background-color: gray;
 `;
+const NoContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+`;
 
 const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
@@ -177,38 +187,43 @@ const PostList = () => {
                 }
             });
     };
-    if (list.length === 0) return null;
     if (!list) return null;
 
     return (
         <Container>
-            {list?.map((member) => {
-                return (
-                    <Posts>
-                        <MemberInfo>
-                            <ProfileImg src={member.profileImg} />
-                            <Name>{member.userName}</Name>
-                        </MemberInfo>
-                        <PostContainer>
-                            {member.photo.map((p) => (
-                                <PostWrap>
-                                    <PostImg src={p.img} />
-                                    {p.isMine && (
-                                        <DeleteButton
-                                            onClick={() => {
-                                                setSelectedImageId(p._id);
-                                                openModal();
-                                            }}
-                                        >
-                                            x
-                                        </DeleteButton>
-                                    )}
-                                </PostWrap>
-                            ))}
-                        </PostContainer>
-                    </Posts>
-                );
-            })}
+            {list.length === 0 && (
+                <NoContent>
+                    이 곳은 갤러리 페이지 입니다. <br /> 가족을 초대하여 사진을 공유해봐요!
+                </NoContent>
+            )}
+            {list.length !== 0 &&
+                list?.map((member) => {
+                    return (
+                        <Posts>
+                            <MemberInfo>
+                                <ProfileImg src={member.profileImg} />
+                                <Name>{member.userName}</Name>
+                            </MemberInfo>
+                            <PostContainer>
+                                {member.photo.map((p) => (
+                                    <PostWrap>
+                                        <PostImg src={p.img} />
+                                        {p.isMine && (
+                                            <DeleteButton
+                                                onClick={() => {
+                                                    setSelectedImageId(p._id);
+                                                    openModal();
+                                                }}
+                                            >
+                                                x
+                                            </DeleteButton>
+                                        )}
+                                    </PostWrap>
+                                ))}
+                            </PostContainer>
+                        </Posts>
+                    );
+                })}
             {isOpenDeleteModal && (
                 <>
                     <Backdrop onClick={closeModal} />
