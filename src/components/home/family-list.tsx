@@ -115,7 +115,7 @@ const FamilyList = () => {
                 "Content-Type": "application/json",
                 token,
             },
-            cache: "reload",
+            cache: "no-store",
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
