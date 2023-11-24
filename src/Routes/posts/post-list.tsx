@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Zoom, toast } from "react-toastify";
 import styled from "styled-components";
 interface Photo {
     _id: string;
@@ -69,7 +70,7 @@ const DeleteButton = styled.div`
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: #888;
+    background-color: #627d50;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -90,6 +91,34 @@ const PostList = () => {
                 setList(data.data);
             });
     }, []);
+    const onClickDelete = (id: string) => {
+        fetch(process.env.REACT_APP_SERVER_URI + `/album/image/delete/${id}`, {
+            headers: {
+                token: localStorage.getItem("jwt") as string,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.ok) {
+                    toast("사진이 성공적으로 삭제 되었습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
+                    window.location.reload();
+                } else {
+                    toast("네트워크에 문제가 발생했습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify_error",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
+                }
+            });
+    };
     if (list.length === 0) return null;
     if (!list) return null;
 
@@ -106,7 +135,7 @@ const PostList = () => {
                             {member.photo.map((p) => (
                                 <PostWrap>
                                     <PostImg src={p.img} />
-                                    {p.isMine && <DeleteButton>x</DeleteButton>}
+                                    {p.isMine && <DeleteButton onClick={() => onClickDelete(p._id)}>x</DeleteButton>}
                                 </PostWrap>
                             ))}
                         </PostContainer>
