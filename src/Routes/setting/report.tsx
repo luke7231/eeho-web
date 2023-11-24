@@ -4,6 +4,7 @@ import FlashLoading from "../../components/common/flash-loading";
 import Button from "../../components/onboarding/button";
 import Title from "../../components/onboarding/title";
 import { Zoom, toast } from "react-toastify";
+import BackButton from "../../components/onboarding/back-button";
 
 const Contanier = styled.div`
     width: 100%;
@@ -81,6 +82,7 @@ const Report = () => {
     };
     return (
         <Contanier>
+            <BackButton />
             <InputContainer>
                 <Title>
                     신고하는 이유를 <br />
