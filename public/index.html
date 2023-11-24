@@ -31,6 +31,17 @@
                     localStorage.setItem("expo_push_token", event.data);
                 }
             });
+            document.addEventListener("message", function (event) {
+                if (typeof event.data === "string") {
+                    if (event.data.startsWith("go_to_main")) {
+                        // 홈으로 이동;
+                        window.location.href = "/";
+                    } else if (event.data.startsWith("go_to_main_with_error")) {
+                        // 홈으로 이동
+                        window.location.href = "/";
+                    }
+                }
+            });
         </script>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
