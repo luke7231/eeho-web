@@ -50,11 +50,11 @@ const CopyTextBox = styled.div`
     font-size: 24px;
     margin-bottom: 48px;
     border-radius: 10px;
-    padding: 6px 0;
+    padding: 12px 0;
 `;
-const Margin = styled.div`
-    margin-bottom: 40px;
-`;
+// const Margin = styled.div`
+//     margin-bottom: 40px;
+// `;
 const CheckButton = styled.button`
     width: 95px;
     height: 44px;
@@ -85,7 +85,7 @@ const CreationResult = () => {
         login();
         navigate("/");
     };
-    const copyText = `www.google.com \n\n 코드: ${familyCode}`;
+    const copyText = `${familyCode}`;
     return (
         <Contanier>
             <Logo src={EehoLogo} />
@@ -94,9 +94,7 @@ const CreationResult = () => {
                 함께 에호하고싶은
                 <br /> 가족 구성원에게 공유해보세요.
             </Text>
-            <CopyTextBox>
-                www.google.com <Margin /> 코드: {familyCode}
-            </CopyTextBox>
+            <CopyTextBox>코드: {familyCode}</CopyTextBox>
             <CopyToClipboard
                 text={copyText}
                 onCopy={() =>
