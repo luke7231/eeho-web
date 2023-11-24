@@ -68,7 +68,7 @@ const Block = () => {
                         돕기 위해 노력합니다. 따라서 우리는 사용자 간의 원활한 관계 유지를 위해 어떤 이유에서든 가족
                         멤버를 차단하기 전에 신중을 요구합니다.
                     </Text>
-                    <Bold>차단 요청: </Bold>
+                    <Bold style={{ marginTop: 40 }}>[차단 요청]</Bold>
                     <Text style={{ fontWeight: 700 }}>
                         그럼에도 차단을 원하시는 분은{" "}
                         <div style={{ marginTop: 20 }}>- 차단을 원하는 가족 구성원의 이름</div>
