@@ -92,6 +92,7 @@ const ModalButton = styled.button`
     background-color: #627d50;
     border-radius: 7px;
     padding: 0 12px;
+    color: black;
 `;
 const NoButton = styled(ModalButton)`
     background-color: gray;
