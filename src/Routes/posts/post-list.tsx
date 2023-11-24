@@ -54,6 +54,7 @@ const PostImg = styled.img`
     width: 120px;
     height: 156px;
     object-fit: cover;
+    border-radius: 12px;
 `;
 const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
