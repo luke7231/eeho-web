@@ -22,7 +22,7 @@ window.addEventListener("message", (event) => {
 function App() {
     return (
         <>
-            <ToastContainer />
+            <ToastContainer closeButton={false} />
             <AuthProvider>
                 <GlobalStyle />
                 <Wrapper>
