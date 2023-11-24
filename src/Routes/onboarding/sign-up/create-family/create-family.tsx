@@ -3,6 +3,7 @@ import Button from "../../../../components/onboarding/button";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import EehoLogo from "../../../../images/icons/EEHO.png";
+import BackButton from "../../../../components/onboarding/back-button";
 
 const Contanier = styled.div`
     width: 100%;
@@ -62,6 +63,7 @@ const CreateFamily = () => {
     };
     return (
         <Contanier>
+            <BackButton />
             <Logo src={EehoLogo} />
             <Title>가족 이름 설정</Title>
             <Text>우리 가족의 이름을 설정해 주세요. 가족구성원 모두에게 표시됩니다.</Text>

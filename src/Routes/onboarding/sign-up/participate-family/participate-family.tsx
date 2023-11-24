@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import EehoLogo from "../../../../images/icons/EEHO.png";
 import { Zoom, toast } from "react-toastify";
+import BackButton from "../../../../components/onboarding/back-button";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -101,13 +102,31 @@ const ParticipateFamily = () => {
                     setIsAuthed(true);
                     setOpenModal(true);
                 } else {
-                    toast("최대 인원에 도달하였습니다.", {
-                        position: "bottom-center",
-                        transition: Zoom,
-                        className: "otl_tostify_error",
-                        autoClose: 1000,
-                        hideProgressBar: true,
-                    });
+                    if (data.message === "max") {
+                        toast("최대 인원에 도달하였습니다.", {
+                            position: "bottom-center",
+                            transition: Zoom,
+                            className: "otl_tostify_error",
+                            autoClose: 1000,
+                            hideProgressBar: true,
+                        });
+                    } else if (data.message === "wrong") {
+                        toast("잘못된 코드입니다.", {
+                            position: "bottom-center",
+                            transition: Zoom,
+                            className: "otl_tostify_error",
+                            autoClose: 1000,
+                            hideProgressBar: true,
+                        });
+                    } else if (data.message === "no_data") {
+                        toast("올바른 코드를 입력해주세요.", {
+                            position: "bottom-center",
+                            transition: Zoom,
+                            className: "otl_tostify_error",
+                            autoClose: 1000,
+                            hideProgressBar: true,
+                        });
+                    }
                 }
             })
             .catch((e) => console.log(e));
@@ -115,6 +134,7 @@ const ParticipateFamily = () => {
 
     return (
         <Contanier>
+            <BackButton />
             <Logo src={EehoLogo} />
             <Title>가족 초대 코드 입력</Title>
 
