@@ -22,6 +22,7 @@ import UpdateProfile from "./Routes/setting/updata-profile";
 import CopyLink from "./Routes/setting/copy-link";
 import ServiceContent from "./Routes/setting/service-content";
 import Privacy from "./Routes/setting/privacy";
+import Login from "./Routes/onboarding/login/login";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -36,6 +37,7 @@ const Router = () => {
                 <Route path="/onboarding4" element={<Intro4 />} />
                 <Route path="/onboarding5" element={<Intro5 />} />
 
+                <Route path="/login" element={<Login />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-up/create" element={<CreateFamily />} />
                 <Route path="/sign-up/create/set-profile" element={<SetProfile />} />

@@ -24,6 +24,12 @@ const ButtonContainer = styled.div`
     padding: 0 29px;
     gap: 17px;
 `;
+const LoginText = styled.div`
+    color: gray;
+    font-size: 16px;
+    margin-top: 70px;
+    text-decoration: underline;
+`;
 const Button = styled.div`
     width: 100%;
     height: 78px;
@@ -58,6 +64,8 @@ const SignUp = () => {
                 새로운 가족 그룹을 생성하거나, <br />
                 이미 만들어진 가족 그룹이 있다면 참가해 보세요.
             </Text>
+
+            <LoginText onClick={() => navigate("/login")}>이미 참여한 계정이 있으신가요? (로그인)</LoginText>
             <ButtonContainer>
                 <Button onClick={onClickCreateButton}>생성</Button>
                 <Button onClick={onClickParticiButton}>참여</Button>
