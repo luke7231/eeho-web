@@ -54,7 +54,7 @@ const Login = () => {
         const data = {
             userName: nickName,
             code: familyCode,
-            // pushToken: localStorage.getItem("expo_push_token") || "",
+            pushToken: localStorage.getItem("expo_push_token") || "",
         };
         fetch(process.env.REACT_APP_SERVER_URI + "/family/member/login", {
             method: "POST",
