@@ -39,7 +39,7 @@ const CopyTextBox = styled.div`
     font-size: 24px;
     margin-bottom: 48px;
     border-radius: 10px;
-    padding: 6px 0;
+    padding: 10px;
     margin-top: 20px;
 `;
 
