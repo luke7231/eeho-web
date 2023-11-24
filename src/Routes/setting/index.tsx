@@ -101,6 +101,15 @@ const NoButton = styled(ModalButton)`
 const Setting = () => {
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false);
+    const [openLogoutModal, setLogoutOpenModal] = useState(false);
+
+    const openLogOutModal = () => {
+        setLogoutOpenModal(true);
+    };
+    const closeLogOutModal = () => {
+        setLogoutOpenModal(false);
+    };
+
     const openSignOutModal = () => {
         setOpenModal(true);
     };
@@ -114,6 +123,30 @@ const Setting = () => {
         e.stopPropagation();
     };
 
+    const reqLogout = () => {
+        fetch(process.env.REACT_APP_SERVER_URI + "/member/logout", {
+            headers: {
+                token: localStorage.getItem("jwt") as string,
+            },
+        })
+            .then((r) => r.json())
+            .then((data) => {
+                if (data.ok) {
+                    tellClearHistory();
+                    localStorage.removeItem("jwt");
+                    localStorage.removeItem("id");
+                    toast("로그아웃 되었습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
+                    navigate("/onboarding");
+                }
+            });
+    };
+
     const reqDeleteAccount = () => {
         fetch(process.env.REACT_APP_SERVER_URI + "/member/account/delete", {
             headers: {
@@ -125,6 +158,7 @@ const Setting = () => {
                 if (data.ok) {
                     tellClearHistory();
                     localStorage.removeItem("jwt");
+                    localStorage.removeItem("id");
                     toast("계정이 성공적으로 삭제 되었습니다.", {
                         position: "bottom-center",
                         transition: Zoom,
@@ -150,7 +184,7 @@ const Setting = () => {
                 <Tab onClick={() => navigate("./report")}>신고</Tab>
                 <Tab onClick={() => navigate("./block")}>차단 문의</Tab>
                 <Tab onClick={() => navigate("./question")}>문의하기</Tab>
-                {/* <Tab onClick={() => navigate("/privacy")}>로그아웃</Tab> */}
+                <Tab onClick={() => openLogOutModal()}>로그아웃</Tab>
                 <Tab onClick={() => openSignOutModal()}>회원 탈퇴</Tab>
             </Menu>
             {/* <Members /> */}
@@ -166,6 +200,19 @@ const Setting = () => {
                         <ModalButtonCon>
                             <ModalButton onClick={() => reqDeleteAccount()}>삭제</ModalButton>
                             <NoButton onClick={closeSignOutModal}>아니오</NoButton>
+                        </ModalButtonCon>
+                    </ModalContainer>
+                </>
+            )}
+
+            {openLogoutModal && (
+                <>
+                    <Backdrop onClick={closeLogOutModal} />
+                    <ModalContainer onClick={(e) => stopPropagation(e)}>
+                        <ModalContent>로그아웃 하시겠습니까?</ModalContent>
+                        <ModalButtonCon>
+                            <ModalButton onClick={() => reqLogout()}>네</ModalButton>
+                            <NoButton onClick={closeLogOutModal}>아니오</NoButton>
                         </ModalButtonCon>
                     </ModalContainer>
                 </>
