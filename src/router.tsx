@@ -25,6 +25,7 @@ import Privacy from "./Routes/setting/privacy";
 import Login from "./Routes/onboarding/login/login";
 import Report from "./Routes/setting/report";
 import Block from "./Routes/setting/block";
+import Question from "./Routes/setting/question";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -58,6 +59,7 @@ const Router = () => {
                 <Route path="/setting/copy_link" element={<CopyLink />} />
                 <Route path="/setting/report" element={<Report />} />
                 <Route path="/setting/block" element={<Block />} />
+                <Route path="/setting/question" element={<Question />} />
 
                 <Route path="/agree" element={<Agree />} />
                 <Route path="/service-content" element={<ServiceContent />} />

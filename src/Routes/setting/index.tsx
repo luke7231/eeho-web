@@ -9,15 +9,15 @@ import { tellClearHistory } from "../../utils/eeho-api/bridge-handler";
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0 33px;
+    padding-bottom: 60px;
 `;
 const Header = styled.div`
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
     display: flex;
@@ -149,6 +149,7 @@ const Setting = () => {
                 <Tab onClick={() => navigate("/privacy")}>개인정보 처리방침</Tab>
                 <Tab onClick={() => navigate("./report")}>신고</Tab>
                 <Tab onClick={() => navigate("./block")}>차단 문의</Tab>
+                <Tab onClick={() => navigate("./question")}>문의하기</Tab>
                 {/* <Tab onClick={() => navigate("/privacy")}>로그아웃</Tab> */}
                 <Tab onClick={() => openSignOutModal()}>회원 탈퇴</Tab>
             </Menu>
