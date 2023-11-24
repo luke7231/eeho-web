@@ -3,6 +3,8 @@ import styled from "styled-components";
 import FlashLoading from "../../../components/common/flash-loading";
 import Button from "../../../components/onboarding/button";
 import BackButton from "../../../components/onboarding/back-button";
+import { tellClearHistory } from "../../../utils/eeho-api/bridge-handler";
+import { useNavigate } from "react-router-dom";
 
 const Contanier = styled.div`
     width: 100%;
@@ -32,7 +34,6 @@ const Input = styled.input`
     height: 36px;
     border: 0;
     width: 100%;
-    // text-align: center;
     padding: 0 10px;
     font-size: 20px;
     max-width: 320px;
@@ -45,10 +46,49 @@ const Login = () => {
     const [familyCode, setFamilyCode] = useState("");
     const [nickName, setNickName] = useState("");
 
+    const navigate = useNavigate();
     const onClickButton = () => {
         setLoading(true);
-        console.log(familyCode);
-        console.log(nickName);
+        const data = {
+            userName: nickName,
+            code: familyCode,
+            // pushToken: localStorage.getItem("expo_push_token") || "",
+        };
+        fetch(process.env.REACT_APP_SERVER_URI + "/family/member/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.ok) {
+                    setLoading(false);
+                    // 로그인 정보 (토큰, 아이디) 저장.
+                    localStorage.setItem("jwt", data.token);
+                    localStorage.setItem("id", data.id);
+                    // 모바일에 저장해라.
+                    const payload = {
+                        type: "store_token",
+                        payload: { token: data.token },
+                    };
+                    window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+                    // 뒤로 못 돌아가게 해라.
+                    tellClearHistory();
+                    // 홈으로 보낸다.
+                    navigate("/", {
+                        state: {
+                            id: data.id,
+                            familyCode: data.code,
+                            token: data.token,
+                        },
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error("데이터를 받아오는 중 오류가 발생했습니다:", error);
+            });
     };
     return (
         <Contanier>
