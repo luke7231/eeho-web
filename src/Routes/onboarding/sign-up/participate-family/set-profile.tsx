@@ -4,6 +4,7 @@ import Button from "../../../../components/onboarding/button";
 import styled from "styled-components";
 import { tellClearHistory } from "../../../../utils/eeho-api/bridge-handler";
 import FlashLoading from "../../../../components/common/flash-loading";
+import { Zoom, toast } from "react-toastify";
 const Contanier = styled.div`
     width: 100%;
     height: 100vh;
@@ -92,6 +93,17 @@ const SetProfile = () => {
                             token: data.token,
                         },
                     });
+                } else {
+                    setLoading(false);
+                    if (data.message === "duplicate") {
+                        toast("가족 내에 동일한 이름이 존재합니다.", {
+                            position: "bottom-center",
+                            transition: Zoom,
+                            className: "otl_tostify_error",
+                            autoClose: 1000,
+                            hideProgressBar: true,
+                        });
+                    }
                 }
             })
             .catch((error) => {

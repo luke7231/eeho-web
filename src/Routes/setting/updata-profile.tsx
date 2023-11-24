@@ -86,13 +86,15 @@ const UpdateProfile = () => {
                     navigate("/");
                     window.location.reload();
                 } else {
-                    toast("변경 상에 오류가 생겼습니다.", {
-                        position: "bottom-center",
-                        transition: Zoom,
-                        className: "otl_tostify_error",
-                        autoClose: 1000,
-                        hideProgressBar: true,
-                    });
+                    if (data.message === "duplicate") {
+                        toast("가족 내에 동일한 이름이 존재합니다.", {
+                            position: "bottom-center",
+                            transition: Zoom,
+                            className: "otl_tostify_error",
+                            autoClose: 1000,
+                            hideProgressBar: true,
+                        });
+                    }
                 }
             })
             .catch((error) => {
