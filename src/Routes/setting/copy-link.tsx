@@ -82,7 +82,7 @@ const CopyLink = () => {
             });
     });
 
-    const copyText = `www.google.com \n\n 코드: ${code}`;
+    const copyText = `${code}`;
 
     return (
         <Contanier>
