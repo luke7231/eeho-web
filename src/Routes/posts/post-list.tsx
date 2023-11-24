@@ -142,7 +142,7 @@ const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState("");
-
+    const [isNoContent, setIsNoContent] = useState(false);
     const openModal = () => {
         setIsOpenDeleteModal(true);
     };
@@ -162,8 +162,11 @@ const PostList = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
-                setList(data.data);
+                if (data.data?.length === 0) {
+                    setIsNoContent(true);
+                } else {
+                    setList(data.data);
+                }
             });
     }, []);
     const reqDeleteImage = (id: string) => {
@@ -191,7 +194,7 @@ const PostList = () => {
 
     return (
         <Container>
-            {list.length === 0 && (
+            {isNoContent && (
                 <NoContent>
                     이 곳은 갤러리 페이지 입니다. <br /> 가족을 초대하여 사진을 공유해봐요!
                 </NoContent>

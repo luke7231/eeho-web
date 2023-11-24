@@ -58,19 +58,22 @@ const NoContent = styled.div`
 const Members = () => {
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
-
+    const [isNoContent, setIsNoContent] = useState(false);
     useEffect(() => {
         const token = localStorage.getItem("jwt") as string;
         fetch(process.env.REACT_APP_SERVER_URI + "/main/members?exceptMe=true", {
             headers: {
-                "Content-Type": "application/json", // 만약 JSON 형태로 데이터를 보내는 경우
+                "Content-Type": "application/json",
                 token: token,
-                // 다른 필요한 헤더가 있다면 추가해주세요
             },
         })
-            .then((response) => response.json()) // 응답을 JSON으로 파싱
+            .then((response) => response.json())
             .then((data) => {
-                setFamily(data.members);
+                if (data.members?.length === 0) {
+                    setIsNoContent(true);
+                } else {
+                    setFamily(data.members);
+                }
             });
     }, []);
 
@@ -93,7 +96,7 @@ const Members = () => {
     };
     return (
         <>
-            {family.length === 0 && (
+            {isNoContent && (
                 <NoContent>
                     이 곳은 사진을 보낼
                     <br /> 가족을 선택하는 페이지 입니다. <br /> 가족을 초대하여 사진을 공유해봐요!
