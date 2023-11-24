@@ -141,7 +141,6 @@ const ParticipateFamily = () => {
             {openModal ? (
                 <NoticebBox>
                     <Title>인증되었습니다.</Title>
-                    <CheckButton onClick={() => setOpenModal(false)}>닫기</CheckButton>
                 </NoticebBox>
             ) : (
                 <>
