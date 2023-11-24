@@ -6,6 +6,7 @@ import BackButton from "../../../components/onboarding/back-button";
 import { tellClearHistory } from "../../../utils/eeho-api/bridge-handler";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/auth-provider";
+import { Zoom, toast } from "react-toastify";
 
 const Contanier = styled.div`
     width: 100%;
@@ -81,6 +82,15 @@ const Login = () => {
                     login();
                     // 홈으로 보낸다.
                     navigate("/");
+                } else {
+                    setLoading(false);
+                    toast("저장된 정보와 일치하지 않습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify_error",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
                 }
             })
             .catch((error) => {
