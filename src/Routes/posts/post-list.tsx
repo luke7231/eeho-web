@@ -18,14 +18,14 @@ const Container = styled.div`
     margin-bottom: 64px;
 `;
 const Posts = styled.div`
-    padding-left: 24px;
     margin-bottom: 24px;
 `;
 const MemberInfo = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    margin-left: 6px;
     margin-bottom: 20px;
+    padding-left: 24px;
 `;
 const ProfileImg = styled.img`
     width: 52px;
@@ -41,6 +41,7 @@ const Name = styled.div`
 `;
 const PostContainer = styled.div`
     display: flex;
+    padding-left: 24px;
     overflow-x: auto;
     ::-webkit-scrollbar {
         display: none;
