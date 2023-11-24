@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FlashLoading from "../../components/common/flash-loading";
 import Button from "../../components/onboarding/button";
 import Title from "../../components/onboarding/title";
+import { Zoom, toast } from "react-toastify";
 
 const Contanier = styled.div`
     width: 100%;
@@ -42,11 +43,41 @@ const Select = styled.select`
 const Report = () => {
     const [loading, setLoading] = useState(false);
     const [topic, setTopic] = useState("스팸 콘텐츠");
+    const [isCompleted, setIsCompleted] = useState(false);
 
     const onClickButton = () => {
         setLoading(true);
         console.log(topic);
         // token 넣고 신고 디비 쌓기.
+        const data = {
+            topic,
+        };
+        fetch(process.env.REACT_APP_SERVER_URI + "/main/report", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                token: localStorage.getItem("jwt") as string,
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.ok) {
+                    console.log(data);
+                    setLoading(false);
+                    setIsCompleted(true);
+                    toast("신고가 성공적으로 접수되었습니다.", {
+                        position: "bottom-center",
+                        transition: Zoom,
+                        className: "otl_tostify",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error("데이터를 받아오는 중 오류가 발생했습니다:", error);
+            });
     };
     return (
         <Contanier>
@@ -79,6 +110,16 @@ const Report = () => {
                     if (!loading) onClickButton();
                 }}
             />
+            {!isCompleted ? (
+                <Button
+                    text="신고 접수하기"
+                    onClick={() => {
+                        if (!loading) onClickButton();
+                    }}
+                />
+            ) : (
+                <Button text="신고가 완료되었습니다!" />
+            )}
         </Contanier>
     );
 };
