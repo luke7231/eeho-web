@@ -31,14 +31,12 @@ const FamilyName = styled.div`
     margin-top: 10px;
     padding: 10px 20px;
     border-radius: 5px;
-
     align-items: center;
-    max-width: 208px;
     justify-content: center;
     background-color: #bfd4b8;
     height: 33px;
+    min-width: 120px;
     color: #1c3411;
-
     font-size: 16px;
     font-weight: 800;
 `;
@@ -92,7 +90,7 @@ const EehoButton = styled.img`
 `;
 const FamilyList = () => {
     const navigate = useNavigate();
-    const [familyName, setFamilyName] = useState("가족이름");
+    const [familyName, setFamilyName] = useState("");
     const [selectedMembers, setSelectedMembers] = useState<FamilyMember[]>([]);
     const [commonUserIds, setCommonUserIds] = useState<string[]>([]);
     const [family, setFamily] = useState<FamilyMember[]>([]);
