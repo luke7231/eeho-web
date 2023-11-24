@@ -7,11 +7,12 @@ const Container = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 0 33px;
 `;
 const Title = styled.div`
+    margin-top: 50px;
     display: flex;
     background-color: #89aa7833;
     border-radius: 6px;
