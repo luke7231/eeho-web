@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+interface Photo {
+    _id: string;
+    isMine: boolean;
+    img: string;
+}
 interface Post {
     userId: string;
     userName: string;
     profileImg: string;
-    photo: string[];
+    photo: Photo[];
 }
 
 const Container = styled.div`
@@ -49,13 +53,28 @@ const PostContainer = styled.div`
 `;
 const PostWrap = styled.div`
     position: relative;
-    margin-right: 10px;
+    margin-right: 0px;
+    padding: 10px;
 `;
 const PostImg = styled.img`
     width: 120px;
     height: 156px;
     object-fit: cover;
     border-radius: 12px;
+`;
+const DeleteButton = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #888;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 `;
 const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
@@ -86,7 +105,8 @@ const PostList = () => {
                         <PostContainer>
                             {member.photo.map((p) => (
                                 <PostWrap>
-                                    <PostImg src={p} />
+                                    <PostImg src={p.img} />
+                                    {p.isMine && <DeleteButton>x</DeleteButton>}
                                 </PostWrap>
                             ))}
                         </PostContainer>
