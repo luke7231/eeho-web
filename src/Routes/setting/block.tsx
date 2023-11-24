@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Title from "../../components/onboarding/title";
+import BackButton from "../../components/onboarding/back-button";
 
 const Contanier = styled.div`
     width: 100%;
@@ -11,7 +12,9 @@ const Contanier = styled.div`
     padding: 0 32px;
     margin-top: 32px;
 `;
-const InputContainer = styled.div``;
+const InputContainer = styled.div`
+    margin-top: 45px;
+`;
 const MessageWrap = styled.div`
     margin-top: 12px;
 `;
@@ -46,6 +49,7 @@ const CopyTextBox = styled.div`
 const Block = () => {
     return (
         <Contanier>
+            <BackButton />
             <InputContainer>
                 <Title style={{ fontSize: 30 }}>차단 문의</Title>
                 <MessageWrap>
