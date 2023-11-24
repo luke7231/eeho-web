@@ -48,8 +48,6 @@ const Report = () => {
 
     const onClickButton = () => {
         setLoading(true);
-        console.log(topic);
-        // token 넣고 신고 디비 쌓기.
         const data = {
             topic,
         };
@@ -64,7 +62,6 @@ const Report = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.ok) {
-                    console.log(data);
                     setLoading(false);
                     setIsCompleted(true);
                     toast("신고가 성공적으로 접수되었습니다.", {

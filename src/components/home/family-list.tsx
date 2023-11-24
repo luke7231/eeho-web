@@ -119,7 +119,6 @@ const FamilyList = () => {
         })
             .then((response) => response.json()) // 응답을 JSON으로 파싱
             .then((data) => {
-                console.log(data, "노란원");
                 const commonIds = data.data
                     .map((aItem: Sender) => aItem.senderId)
                     .filter((senderId: string) => family.filter((bItem) => bItem.userId === senderId));
@@ -167,8 +166,7 @@ const FamilyList = () => {
             const usernames = selectedMembers.map((m) => m.userId);
             const token = localStorage.getItem("jwt");
             if (token) {
-                const res = await fetchReqEeho(usernames, token);
-                console.log(res);
+                await fetchReqEeho(usernames, token);
             }
             toast("에호가 전송되었습니다!", {
                 position: "bottom-center",
@@ -201,7 +199,7 @@ const FamilyList = () => {
     );
 
     if (!family) return null;
-    console.log(family);
+
     return (
         <Container>
             <FamilyName>{familyName}</FamilyName>
