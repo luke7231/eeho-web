@@ -23,6 +23,7 @@ import CopyLink from "./Routes/setting/copy-link";
 import ServiceContent from "./Routes/setting/service-content";
 import Privacy from "./Routes/setting/privacy";
 import Login from "./Routes/onboarding/login/login";
+import Report from "./Routes/setting/report";
 
 const Router = () => {
     const { isLoggedIn } = useAuth();
@@ -54,6 +55,7 @@ const Router = () => {
                 <Route path="/setting" element={<Setting />} />
                 <Route path="/setting/update_profile" element={<UpdateProfile />} />
                 <Route path="/setting/copy_link" element={<CopyLink />} />
+                <Route path="/setting/report" element={<Report />} />
 
                 <Route path="/agree" element={<Agree />} />
                 <Route path="/service-content" element={<ServiceContent />} />

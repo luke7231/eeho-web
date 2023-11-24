@@ -147,6 +147,8 @@ const Setting = () => {
                 <Tab onClick={() => navigate("./copy_link")}>초대링크</Tab>
                 <Tab onClick={() => navigate("/service-content")}>서비스 이용 약관</Tab>
                 <Tab onClick={() => navigate("/privacy")}>개인정보 처리방침</Tab>
+                <Tab onClick={() => navigate("./report")}>신고</Tab>
+                {/* <Tab onClick={() => navigate("/privacy")}>로그아웃</Tab> */}
                 <Tab onClick={() => openSignOutModal()}>회원 탈퇴</Tab>
             </Menu>
             {/* <Members /> */}
