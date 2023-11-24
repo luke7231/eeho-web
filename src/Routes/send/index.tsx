@@ -34,6 +34,18 @@ const Partition = styled.div`
     margin-bottom: 50px;
 `;
 
+window.addEventListener("message", (event) => {
+    if (typeof event.data === "string") {
+        if (event.data.startsWith("go_to_main")) {
+            // 홈으로 이동
+            window.location.href = "/";
+        } else if (event.data.startsWith("go_to_main_with_error")) {
+            // 홈으로 이동
+            window.location.href = "/";
+        }
+    }
+});
+
 const Send = () => {
     return (
         <Container>
