@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Zoom, toast } from "react-toastify";
 import styled from "styled-components";
+import XCloseButtonImg from "../../images/icons/x_close.png";
 interface Photo {
     _id: string;
     isMine: boolean;
@@ -11,6 +12,10 @@ interface Post {
     userName: string;
     profileImg: string;
     photo: Photo[];
+}
+interface FullScreenProp {
+    isOpen: boolean;
+    img?: string | null;
 }
 
 const Container = styled.div`
@@ -109,7 +114,39 @@ const ModalContainer = styled.div`
     font-size: 15px;
     font-weight: 600;
 `;
+const FullScreenContainer = styled.div`
+    position: fixed;
+    width: 100%;
+    padding: 20px;
+    z-index: 2;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 600;
+`;
+const FullScreenBackDrop = styled(Backdrop)``;
+const FullScreenImg = styled.img`
+    width: 88%;
+    border-radius: 12px;
+`;
+const CloseButton = styled.img`
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 24px 24px 0 24px;
+    z-index: 3;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+`;
 const ModalContent = styled.div``;
 
 const ModalButtonCon = styled.div`
@@ -143,6 +180,13 @@ const PostList = () => {
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState("");
     const [isNoContent, setIsNoContent] = useState(false);
+    const [isOpenFullScreen, setIsOpenFullScreen] = useState<FullScreenProp>({ isOpen: false, img: "" });
+    const openFullScreen = (img: string) => {
+        setIsOpenFullScreen({ isOpen: true, img });
+    };
+    const closeFullScreen = () => {
+        setIsOpenFullScreen({ isOpen: false, img: "" });
+    };
     const openModal = () => {
         setIsOpenDeleteModal(true);
     };
@@ -210,7 +254,7 @@ const PostList = () => {
                             <PostContainer>
                                 {member.photo.map((p) => (
                                     <PostWrap>
-                                        <PostImg src={p.img} />
+                                        <PostImg src={p.img} onClick={() => openFullScreen(p.img)} />
                                         {p.isMine && (
                                             <DeleteButton
                                                 onClick={() => {
@@ -241,6 +285,27 @@ const PostList = () => {
                         </ModalButtonCon>
                     </ModalContainer>
                 </>
+            )}
+
+            {isOpenFullScreen.isOpen && (
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        width: "100%",
+                        height: "100%",
+                    }}
+                >
+                    <FullScreenBackDrop onClick={closeFullScreen} />
+                    <CloseButton src={XCloseButtonImg} onClick={closeFullScreen} />
+                    <FullScreenContainer onClick={(e) => stopPropagation(e)}>
+                        <FullScreenImg src={isOpenFullScreen.img as string} />
+                    </FullScreenContainer>
+                </div>
             )}
         </Container>
     );
