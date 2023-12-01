@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import HomeImg from "../images/icons/home_icon.png";
+import HomeImgInactive from "../images/icons/home_icon_inactive.png";
 import CameraImg from "../images/icons/camera_icon.png";
+import CameraImgActive from "../images/icons/camera_icon_active.png";
 import GalaryImg from "../images/icons/galary_icon.png";
-import { useNavigate } from "react-router-dom";
+import GalaryImgActive from "../images/icons/galary_icon_active.png";
+import { useLocation, useNavigate } from "react-router-dom";
 const Container = styled.div`
     position: fixed;
     bottom: 0;
@@ -37,18 +40,20 @@ const Galary = styled.img`
 
 const BottomTab = () => {
     const navigate = useNavigate();
+
+    const pathName = useLocation().pathname;
     return (
         <Container>
             <TabWrapper>
-                <Camera src={CameraImg} onClick={() => navigate("/send")} />
+                <Camera src={pathName === "/send" ? CameraImgActive : CameraImg} onClick={() => navigate("/send")} />
             </TabWrapper>
             {/* <Partition /> */}
             <TabWrapper style={{ borderRight: "2px solid #CDD4BA", borderLeft: "2px solid #CDD4BA" }}>
-                <Home src={HomeImg} onClick={() => navigate("/")} />
+                <Home src={pathName === "/" ? HomeImg : HomeImgInactive} onClick={() => navigate("/")} />
             </TabWrapper>
             {/* <Partition /> */}
             <TabWrapper>
-                <Galary src={GalaryImg} onClick={() => navigate("/posts")} />
+                <Galary src={pathName === "/posts" ? GalaryImgActive : GalaryImg} onClick={() => navigate("/posts")} />
             </TabWrapper>
         </Container>
     );
