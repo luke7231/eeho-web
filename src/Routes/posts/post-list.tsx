@@ -138,7 +138,7 @@ const FullScreenImg = styled.img`
 `;
 const CloseButton = styled.img`
     color: #fff;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: 24px 24px 0 24px;
