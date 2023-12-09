@@ -6,6 +6,7 @@ import { getResponsiveMaxWidth } from "./utils/layout-util";
 import { AuthProvider } from "./contexts/auth-provider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ComingSoon from "./Routes/home/coming-soon";
 const Wrapper = styled.section`
     height: 100%;
     width: 100%;
@@ -26,7 +27,8 @@ function App() {
             <AuthProvider>
                 <GlobalStyle />
                 <Wrapper>
-                    <Router />
+                    {/* <Router /> */}
+                    <ComingSoon />
                 </Wrapper>
             </AuthProvider>
         </>
