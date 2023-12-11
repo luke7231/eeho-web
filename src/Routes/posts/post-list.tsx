@@ -174,7 +174,30 @@ const NoContent = styled.div`
     font-weight: 600;
     text-align: center;
 `;
+const PostListContainer = styled.div`
+    width: 100%;
+    height: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 28px 13px;
+    align-items: center;
+    padding: 0 11px;
+`;
+const Post = styled.div``;
 
+const Img = styled.img`
+    width: 100%;
+    aspect-ratio: 1 / 2;
+    object-fit: cover;
+`;
+const postLists = [
+    "https://source.unsplash.com/random/300×300",
+    "https://source.unsplash.com/random/300×400",
+    "https://source.unsplash.com/random/300×500",
+    "https://source.unsplash.com/random/300×300",
+    "https://source.unsplash.com/random/300×300",
+    "https://source.unsplash.com/random/300×300",
+];
 const PostList = () => {
     const [list, setList] = useState<Post[]>([]);
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
@@ -234,16 +257,16 @@ const PostList = () => {
                 }
             });
     };
-    if (!list) return null;
+    // if (!list) return null;
 
     return (
         <Container>
             {isNoContent && (
                 <NoContent>
-                    이 곳은 갤러리 페이지 입니다. <br /> 가족을 초대하여 사진을 공유해봐요!
+                    이 곳은 갤러리 페이지 입니다. <br /> 그룹 인원을 초대하여 사진을 공유해봐요!
                 </NoContent>
             )}
-            {list.length !== 0 &&
+            {/* {list.length !== 0 &&
                 list?.map((member) => {
                     return (
                         <Posts>
@@ -270,7 +293,16 @@ const PostList = () => {
                             </PostContainer>
                         </Posts>
                     );
+                })} */}
+            <PostListContainer>
+                {postLists.map((p) => {
+                    return (
+                        <Post>
+                            <Img src={p} />
+                        </Post>
+                    );
                 })}
+            </PostListContainer>
             {isOpenDeleteModal && (
                 <>
                     <Backdrop onClick={closeModal} />
