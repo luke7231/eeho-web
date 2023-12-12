@@ -16,7 +16,7 @@ const Container = styled.div`
     grid-gap: 4px;
     align-items: center;
     padding: 4px;
-    background-color: #fafff1;
+    background-color: #fff;
 `;
 const TabWrapper = styled.div`
     display: flex;
