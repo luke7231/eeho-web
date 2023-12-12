@@ -27,8 +27,8 @@ function App() {
             <AuthProvider>
                 <GlobalStyle />
                 <Wrapper>
-                    {/* <Router /> */}
-                    <ComingSoon />
+                    <Router />
+                    {/* <ComingSoon /> */}
                 </Wrapper>
             </AuthProvider>
         </>
