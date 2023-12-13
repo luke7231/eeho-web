@@ -22,7 +22,7 @@ const Intro1 = () => {
     };
     return (
         <Contanier>
-            <Image src={"https://eeho-b890d.du.r.appspot.com/image/onboarding1-img.png"} />
+            <Image src={"https://feople-eeho.com/image/onboarding1-img.png"} />
             <Title style={{ marginTop: 40 }}>
                 <GreenText>가족과의 연락</GreenText>, 어떻게 <br /> 하고 계신가요?
             </Title>

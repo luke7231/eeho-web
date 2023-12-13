@@ -27,7 +27,7 @@ const Intro2 = () => {
         <Contanier>
             <BackButton />
             <FadeInWrapper>
-                <Image src={"https://eeho-b890d.du.r.appspot.com/image/onboarding2-img.png"} />
+                <Image src={"https://feople-eeho.com/image/onboarding2-img.png"} />
             </FadeInWrapper>
             <Title style={{ marginTop: 70 }}>
                 가족에게 보내는
